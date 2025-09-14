@@ -1,0 +1,5 @@
+# 11. Escreva um programa que calcule o IMC (Índice de Massa Corporal)
+peso = (float(input("Digite o peso da pessoa em kilogramas (Kg): ")))
+altura = (float(input("Digite a altura da pessoa em metros (m): ")))
+IMC = (peso / (altura ** 2))
+print("O IMC dessa pessoa cujo seu peso é igual {} Kg e a sua altura é igual {} m é {:.2f} Kg/m²".format(peso, altura, IMC))
