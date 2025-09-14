@@ -1,1 +1,0 @@
-# 45. Crie um programa que verifique se uma data é válida (formato simples).
