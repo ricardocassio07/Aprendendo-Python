@@ -1,0 +1,1 @@
+Repositório criado para guardar códigos em Python, focados no aprendizado da linguagem e de suas estruturas, como variáveis, condicionais, laços, listas e funções, com ênfase na lógica, clareza e organização do código.
