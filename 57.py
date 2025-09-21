@@ -133,7 +133,8 @@ while (jogoFinalizado == False):
         print("a  | {} | {} | {} |".format(A1, A2, A3))
         print("b  | {} | {} | {} |".format(B1, B2, B3))
         print("c  | {} | {} | {} |".format(C1, C2, C3))
-    elif (rodada == 10):
+        
+    if (rodada == 10):
         print("IHHHH!!! DEU 'VELHA', PORTANTO, NÃO TEMOS VENCEDORES, O JOGO TERMINOU EMPATADO!!!")
         print("     1    2    3 ")
         print("a  | {} | {} | {} |".format(A1, A2, A3))
