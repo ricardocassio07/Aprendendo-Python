@@ -1,4 +1,4 @@
-# 4. Crie um programa que analise uma lista de palavras e encontre anagramas usando manipulação de strings.
+# 54. Crie um programa que analise uma lista de palavras e encontre anagramas usando manipulação de strings.
 lista = ["roma", "banana", "macaco", "pera", "maça", "abacate", "perda", "mora", "amor", "ramo", "xícara", "alface", "tomate", "azul", "padre"]
 anagramas = []
 i = 0

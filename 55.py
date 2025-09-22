@@ -1,4 +1,4 @@
-# 5. Desenvolva um sistema de controle de estoque usando listas e tuplas com operações CRUD [Create (Criar), Read (Ler), Update (Atualizar) e Delete (Apagar)].
+# 55. Desenvolva um sistema de controle de estoque usando listas e tuplas com operações CRUD [Create (Criar), Read (Ler), Update (Atualizar) e Delete (Apagar)].
 produto1 = ("maça", 30)
 produto2 = ("pepino", 50)
 produto3 = ("banana", 15)

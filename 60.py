@@ -1,4 +1,4 @@
-# 10. Implemente um sistema de validação de CPF que verifique se o formato está correto, calcule os dígitos verificadores e trate todas as exceções possíveis.
+# 60. Implemente um sistema de validação de CPF que verifique se o formato está correto, calcule os dígitos verificadores e trate todas as exceções possíveis.
 try:
     CPF = (int(input("Digite o CPF (SEM TRAÇOS OU PONTOS): ")))
     CPF = str(CPF)

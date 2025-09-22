@@ -1,4 +1,4 @@
-# 7. Crie um programa que simule um jogo da velha com validação de jogadas e detecção de vitória.
+# 57. Crie um programa que simule um jogo da velha com validação de jogadas e detecção de vitória.
 import random
 A1 = "a1"
 A2 = "a2"

@@ -1,4 +1,4 @@
-# 6. Implemente um gerador de senhas seguras com diferentes critérios e validação.
+# 56. Implemente um gerador de senhas seguras com diferentes critérios e validação.
 import random
 letras = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "J", "K", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 numeros = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
