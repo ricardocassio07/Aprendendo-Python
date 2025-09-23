@@ -8,15 +8,16 @@ pessoas = {
 try:
     encerrarSessao = False
     while encerrarSessao == False:
-        opcao = int(input("O que deseja fazer?\nDigite:\n1- Cadastrar pessoas;\n2- Listar pessoas;\n3-Buscar pessoas;\n4- Atualizar dados;\n 5- Encerrar sessão.\n-> "))
+        opcao = int(input("O que deseja fazer?\nDigite:\n1- Cadastrar pessoas;\n2- Listar pessoas;\n3- Buscar pessoas;\n4- Atualizar dados;\n5- Encerrar sessão.\n-> "))
         if (1 <= opcao <= 5):
             print("OPÇÃO VÁLIDA!!!")
             if (opcao == 1):
                 nome = input("Digite o nome da pessoa que deseja cadastrar:\n-> ")
-                while (nome == " "):
+                while (nome.strip() == ""):
                     print("NOME INVÁLIDO!!!")
                     nome = input("Digite o nome da pessoa que deseja cadastrar:\n-> ")
 
+                CPFValidado = False
                 try:
                     CPF = (int(input("Digite o CPF (SEM TRAÇOS OU PONTOS): ")))
                     CPF = str(CPF)
@@ -63,6 +64,7 @@ try:
                                 print("CPF INVÁLIDO!!!")
                             else:
                                 print("O CPF {}{}{}.{}{}{}.{}{}{}-{}{} É VÁLIDO!!!".format(n1, n2, n3, n4, n5, n6, n7, n8, n9, n10, n11))
+                                CPFValidado = True
                     else:
                         print("O CPF É INVÁLIDO, POIS ELE DEVE CONTER EXATAMENTE 11 DIGITOS!!!")
                 except ValueError:
@@ -77,16 +79,59 @@ try:
                     print("DIGITE APENAS NÚMEROS!!!")
 
                 cidade = input("Em qual cidade essa pessoa mora:\n-> ")
-                while (cidade == " "):
+                while (cidade.strip() == ""):
                     cidade = input("Em qual cidade essa pessoa mora:\n-> ")
 
-                pessoas[CPF] = [f"nome:{nome}", f"idade: {idade}", f"cidade: {cidade}"]
+                if CPF in pessoas:
+                    print("USUÁRIO JÁ CADASTRADo!!!")
+                    continue
+                elif (CPFValidado == True):
+                    pessoas[CPF] = {"nome":nome, "idade": idade, "cidade": cidade}
                 
             elif (opcao == 2):
+                print(pessoas)
 
             elif (opcao == 3): 
-
+                try:
+                    CPF = (int(input("Digite o CPF (SEM TRAÇOS OU PONTOS): ")))
+                    CPF = str(CPF)
+                    if (len(CPF) == 11):
+                        if CPF in pessoas:
+                            print(pessoas[CPF])
+                        else:
+                            print("USUÁRIO NÃO CADASTRADO!!!")
+                    else:
+                        print("O CPF É INVÁLIDO, POIS ELE DEVE CONTER EXATAMENTE 11 DIGITOS!!!")
+                except ValueError:
+                    print("DIGITE APENAS NÚMEROS!!!")
             elif (opcao == 4):
+                try:
+                    CPF = (int(input("Digite o CPF (SEM TRAÇOS OU PONTOS): ")))
+                    CPF = str(CPF)
+                    if (len(CPF) == 11):
+                        if CPF in pessoas:
+                            print(pessoas[CPF])
+                            try:
+                                idade = (int(input("Digite a idade dessa pessoa:\n-> ")))
+                                while (idade <= 0):
+                                    print("IDADE INVÁLIDA!!!")
+                                    idade = (int(input("Digite a idade dessa pessoa:\n-> ")))
+                            except ValueError:
+                                print("DIGITE APENAS NÚMEROS!!!")
+
+                            cidade = input("Em qual cidade essa pessoa mora:\n-> ")
+                            while (cidade.strip() == ""):
+                                cidade = input("Em qual cidade essa pessoa mora:\n-> ")
+
+                        else:
+                            print("USUÁRIO NÃO CADASTRADO!!!")
+                    else:
+                        print("O CPF É INVÁLIDO, POIS ELE DEVE CONTER EXATAMENTE 11 DIGITOS!!!")
+                except ValueError:
+                    print("DIGITE APENAS NÚMEROS!!!")
+
+                pessoas[CPF]["idade"] = idade
+                pessoas[CPF]["cidade"] = cidade
 
             elif (opcao == 5):
                 print("OK!!!\nFOI ÓTIMO TER VOCÊ CONOSCO!!!")
