@@ -1,9 +1,9 @@
 # 58. Desenvolva um sistema de cadastro de pessoas com validação de dados e busca.
 pessoas = {
-    "123.456.789-09": {"nome": "Ana", "idade": 25, "cidade": "São Paulo"},
-    "987.654.321-00": {"nome": "Carlos", "idade": 30, "cidade": "Rio de Janeiro"},
-    "456.789.123-32": {"nome": "Mariana", "idade": 22, "cidade": "Belo Horizonte"},
-    "321.654.987-76": {"nome": "João", "idade": 28, "cidade": "Curitiba"}
+    "12345678909": {"nome": "Ana", "idade": 25, "cidade": "São Paulo"},
+    "98765432100": {"nome": "Carlos", "idade": 30, "cidade": "Rio de Janeiro"},
+    "45678912332": {"nome": "Mariana", "idade": 22, "cidade": "Belo Horizonte"},
+    "32165498776": {"nome": "João", "idade": 28, "cidade": "Curitiba"}
 }
 try:
     encerrarSessao = False
@@ -70,13 +70,17 @@ try:
                 except ValueError:
                     print("DIGITE APENAS NÚMEROS!!!")
 
-                try:
-                    idade = (int(input("Digite a idade dessa pessoa:\n-> ")))
-                    while (idade <= 0):
-                        print("IDADE INVÁLIDA!!!")
+            
+                valido = False
+                while (valido == False):
+                    try:
                         idade = (int(input("Digite a idade dessa pessoa:\n-> ")))
-                except ValueError:
-                    print("DIGITE APENAS NÚMEROS!!!")
+                        while (idade <= 0):
+                            print("IDADE INVÁLIDA!!!")
+                            idade = (int(input("Digite a idade dessa pessoa:\n-> ")))
+                        valido = True
+                    except ValueError:
+                        print("DIGITE APENAS NÚMEROS!!!")
 
                 cidade = input("Em qual cidade essa pessoa mora:\n-> ")
                 while (cidade.strip() == ""):
@@ -89,7 +93,12 @@ try:
                     pessoas[CPF] = {"nome":nome, "idade": idade, "cidade": cidade}
                 
             elif (opcao == 2):
-                print(pessoas)
+                for CPF in pessoas:
+                    print(f"CPF: {CPF}")
+                    print(f"NOME: {pessoas[CPF]['nome']}")
+                    print(f"IDADE: {pessoas[CPF]['idade']}")
+                    print(f"CIDADE: {pessoas[CPF]['cidade']}")
+                    print("---------------------------------------------")
 
             elif (opcao == 3): 
                 try:
@@ -97,7 +106,10 @@ try:
                     CPF = str(CPF)
                     if (len(CPF) == 11):
                         if CPF in pessoas:
-                            print(pessoas[CPF])
+                            print(f"CPF: {CPF}")
+                            print(f"NOME: {pessoas[CPF]['nome']}")
+                            print(f"IDADE: {pessoas[CPF]['idade']}")
+                            print(f"CIDADE: {pessoas[CPF]['cidade']}")
                         else:
                             print("USUÁRIO NÃO CADASTRADO!!!")
                     else:
@@ -110,14 +122,24 @@ try:
                     CPF = str(CPF)
                     if (len(CPF) == 11):
                         if CPF in pessoas:
-                            print(pessoas[CPF])
-                            try:
-                                idade = (int(input("Digite a idade dessa pessoa:\n-> ")))
-                                while (idade <= 0):
-                                    print("IDADE INVÁLIDA!!!")
+                            print(f"CPF: {CPF}")
+                            print(f"NOME: {pessoas[CPF]['nome']}")
+                            print(f"IDADE: {pessoas[CPF]['idade']}")
+                            print(f"CIDADE: {pessoas[CPF]['cidade']}")
+                            nome = input("Digite o nome da pessoa:\n-> ")
+                            while (nome.strip() == ""):
+                                print("NOME INVÁLIDO!!!")
+                                nome = input("Digite o nome da pessoa:\n-> ")
+                            valido = False
+                            while (valido == False):
+                                try:
                                     idade = (int(input("Digite a idade dessa pessoa:\n-> ")))
-                            except ValueError:
-                                print("DIGITE APENAS NÚMEROS!!!")
+                                    while (idade <= 0):
+                                        print("IDADE INVÁLIDA!!!")
+                                        idade = (int(input("Digite a idade dessa pessoa:\n-> ")))
+                                    valido = True
+                                except ValueError:
+                                    print("DIGITE APENAS NÚMEROS!!!")
 
                             cidade = input("Em qual cidade essa pessoa mora:\n-> ")
                             while (cidade.strip() == ""):
@@ -130,6 +152,7 @@ try:
                 except ValueError:
                     print("DIGITE APENAS NÚMEROS!!!")
 
+                pessoas[CPF]["nome"] = nome
                 pessoas[CPF]["idade"] = idade
                 pessoas[CPF]["cidade"] = cidade
 
