@@ -5,9 +5,10 @@ pessoas = {
     "45678912332": {"nome": "Mariana", "idade": 22, "cidade": "Belo Horizonte"},
     "32165498776": {"nome": "João", "idade": 28, "cidade": "Curitiba"}
 }
-try:
-    encerrarSessao = False
-    while encerrarSessao == False:
+
+encerrarSessao = False
+while encerrarSessao == False:
+    try:
         opcao = int(input("O que deseja fazer?\nDigite:\n1- Cadastrar pessoas;\n2- Listar pessoas;\n3- Buscar pessoas;\n4- Atualizar dados;\n5- Encerrar sessão.\n-> "))
         if (1 <= opcao <= 5):
             print("OPÇÃO VÁLIDA!!!")
@@ -162,5 +163,5 @@ try:
         else:
             print("DIGITE 1, 2, 3, 4 OU 5!!!")
 
-except ValueError:
-    print("DIGITE APENAS NÚMEROS!!!")
+    except ValueError:
+        print("DIGITE APENAS NÚMEROS!!!")
