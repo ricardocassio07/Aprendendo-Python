@@ -1,4 +1,4 @@
-# 57. Crie um programa que simule um jogo da velha com validação de jogadas e detecção de vitória.
+# 7. Crie um programa que simule um jogo da velha com validação de jogadas e detecção de vitória.
 import random
 A1 = "a1"
 A2 = "a2"
@@ -15,22 +15,22 @@ jogadorDaVez = ""
 while (jogoFinalizado == False):
     print("LINHAS - 'a', 'b' OU 'c'")
     print("COLUNAS - '1', '2' OU '3'")
-    print("     1    2    3 ")
-    print("a  | {} | {} | {} |".format(A1, A2, A3))
-    print("b  | {} | {} | {} |".format(B1, B2, B3))
-    print("c  | {} | {} | {} |".format(C1, C2, C3))
+    print("    1  2  3")
+    print("a  |{}|{}|{}|".format(A1, A2, A3))
+    print("b  |{}|{}|{}|".format(B1, B2, B3))
+    print("c  |{}|{}|{}|".format(C1, C2, C3))
 
     if (rodada == 1):
         g = random.randint(0, 1)
         if (g == 0):
-            jogadorDaVez = "❌"
+            jogadorDaVez = "X "
         else:
-            jogadorDaVez = "⭕"
+            jogadorDaVez = "O "
     elif (rodada > 1):
-        if (jogadorDaVez == "❌"):
-            jogadorDaVez = "⭕"
+        if (jogadorDaVez == "X "):
+            jogadorDaVez = "O "
         else:
-            jogadorDaVez = "❌"
+            jogadorDaVez = "X "
     print("JOGADOR DA VEZ: {}".format(jogadorDaVez))
 
     opçõesValidas = False
@@ -109,34 +109,36 @@ while (jogoFinalizado == False):
             print("DIGITE APENAS NÚMEROS!!!")
             
     if (A1 == A2 == A3):
-        jogoFinalizado = True
+        temosUmVencedor = True
     elif (B1 == B2 == B3):
-        jogoFinalizado = True
+        temosUmVencedor = True
     elif (C1 == C2 == C3):
-        jogoFinalizado = True
+        temosUmVencedor = True
     elif (A1 == B1 == C1):
-        jogoFinalizado = True
+        temosUmVencedor = True
     elif (A2 == B2 == C2):
-        jogoFinalizado = True
+        temosUmVencedor = True
     elif (A3 == B3 == C3):
-        jogoFinalizado = True
+        temosUmVencedor = True
     elif (A1 == B2 == C3):
-        jogoFinalizado = True
+        temosUmVencedor = True
     elif (A3 == B2 == C1):
-        jogoFinalizado = True
+        temosUmVencedor = True
     else:
-        jogoFinalizado = False
+        temosUmVencedor = False
 
-    if (jogoFinalizado == True):
-        print("Após {} rodadas, nós temos um vencedor!!!\nPARÁBENS, JOGADOR {}, VOCÊ FOI O GRANDE VENCEDOR DESSA PARTIDA!!!".format((rodada - 1), jogadorDaVez))
+    if (temosUmVencedor == True):
+        print("Após {} rodadas, nós temos um vencedor!!!\nPARÁBENS, JOGADOR '{}', VOCÊ FOI O GRANDE VENCEDOR DESSA PARTIDA!!!".format((rodada - 1), jogadorDaVez))
         print("     1    2    3 ")
-        print("a  | {} | {} | {} |".format(A1, A2, A3))
-        print("b  | {} | {} | {} |".format(B1, B2, B3))
-        print("c  | {} | {} | {} |".format(C1, C2, C3))
+        print("a  |{}|{}|{}|".format(A1, A2, A3))
+        print("b  |{}|{}|{}|".format(B1, B2, B3))
+        print("c  |{}|{}|{}|".format(C1, C2, C3))
+        jogoFinalizado = True
         
-    if (rodada == 10):
+    if ((rodada == 10) and (temosUmVencedor == False)):
         print("IHHHH!!! DEU 'VELHA', PORTANTO, NÃO TEMOS VENCEDORES, O JOGO TERMINOU EMPATADO!!!")
         print("     1    2    3 ")
-        print("a  | {} | {} | {} |".format(A1, A2, A3))
-        print("b  | {} | {} | {} |".format(B1, B2, B3))
-        print("c  | {} | {} | {} |".format(C1, C2, C3))
+        print("a  |{}|{}|{}|".format(A1, A2, A3))
+        print("b  |{}|{}|{}|".format(B1, B2, B3))
+        print("c  |{}|{}|{}|".format(C1, C2, C3))
+        jogoFinalizado = True
