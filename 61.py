@@ -8,9 +8,11 @@ frases = (re.split(r"[.!?]+", texto))
 # Retirando strings vazias da lista:
 i = 0
 while (i < len(frases)):
+    # Quando removemos um item da lista, o próximo elemento ocupa sua posição e a largura da lista muda. Por isso, para garantir que todos os elementos sejam verificados, não aumentamos o 'i':
     if (frases[i] == ""):
         del frases[i]
     else:
+        # Só avançamos (i += 1) quando nada foi removido, garantindo que todos os itens sejam verificados:
         i += 1
 
 qtdFrases = (len(frases))
@@ -20,11 +22,13 @@ palavras = (re.split(r"[-,.!?()\s@#$%&*£¢]+", texto))
 # Retirando strings vazias ou numéricas da lista:
 i = 0
 while (i < len(palavras)):
+    # Quando removemos um item da lista, o próximo elemento ocupa sua posição e a largura da lista muda. Por isso, para garantir que todos os elementos sejam verificados, não aumentamos o 'i':
     if (palavras[i] == ""):
         del palavras[i]
     elif (palavras[i].isdigit()):
         del palavras[i]
     else:
+        # Só avançamos (i += 1) quando nada foi removido, garantindo que todos os itens sejam verificados:
         i += 1
 
 qtdPalavras = (len(palavras))
