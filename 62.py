@@ -1,17 +1,32 @@
 # 12. Crie um sistema de gerenciamento de biblioteca com busca avançada, empréstimos e controle de multas usando listas e tuplas.
-# Lista de livros: (id, título, autor, ano, gênero, disponível)
+# Lista de livros: (título, autor, ano, gênero, status)
 livros = [
     ("Dom Casmurro", "Machado de Assis", 1899, "Romance", "DISPONÍVEL"),
     ("O Pequeno Príncipe", "Antoine de Saint-Exupéry", 1943, "Infantil", "DISPONÍVEL"),
-    ("1984", "George Orwell", 1949, "Distopia", "DISPONÍVEL")
+    ("1984", "George Orwell", 1949, "Distopia", "DISPONÍVEL"),
+    ("Capitães da Areia", "Jorge Amado", 1937, "Romance", "DISPONÍVEL"),
+    ("A Revolução dos Bichos", "George Orwell", 1945, "Sátira", "DISPONÍVEL"),
+    ("Grande Sertão: Veredas", "João Guimarães Rosa", 1956, "Romance", "DISPONÍVEL"),
+    ("Memórias Póstumas de Brás Cubas", "Machado de Assis", 1881, "Romance", "DISPONÍVEL"),
+    ("Ensaio sobre a Cegueira", "José Saramago", 1995, "Ficção", "DISPONÍVEL"),
+    ("O Hobbit", "J.R.R. Tolkien", 1937, "Fantasia", "DISPONÍVEL"),
+    ("Harry Potter e a Pedra Filosofal", "J.K. Rowling", 1997, "Fantasia", "DISPONÍVEL")
 ]
 
-# Lista de usuários: (id, nome, livros_emprestados)
+# Lista de usuários: (nome, livros_emprestados)
 usuarios = [
     ("Ana", []),
     ("Carlos", []),
-    ("Mariana", [])
+    ("Mariana", []),
+    ("João", []),
+    ("Beatriz", []),
+    ("Rafael", []),
+    ("Fernanda", []),
+    ("Lucas", []),
+    ("Juliana", []),
+    ("Mateus", [])
 ]
+
 
 # Lista de empréstimos: (nome do cliente, nome do livro, data_emprestimo, data_devolucao)
 emprestimos = []
@@ -309,15 +324,6 @@ while encerrarSessao == False:
                                         print("O cliente devolveu o livro com atraso!!!")
                                         print("A data de devolução era: {}/{}/{}!!!".format(diaEstimado, mesEstimado, anoEstimado))
 
-                                    nomeLivro = emprestimos[IDDoEmprestimo[1]]
-                                    for livro in livros:
-                                        if (livro[0] == nomeLivro):
-                                            livro = ((livro[0], livro[1], livro[2], livro[3], livro[4], "DISPONÍVEL"))
-                                            del livro
-                                            livros.append(livro)
-                                    for emprestimo in usuarios:
-                                        if (usuarios[])
-
                             else:
                                 print("O livro não foi emprestado!!!")
                         else:
@@ -352,7 +358,7 @@ while encerrarSessao == False:
                     while (valido == False):
                         try:
                             ano = int(input("Digite o nome do autor:\n-> "))
-                            while (ano.strip() == ""):
+                            while (ano <= 0):
                                 ano = int(input("Digite o nome do autor:\n-> "))
                             valido = True
                             for livro in livros:
