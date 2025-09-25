@@ -1,9 +1,9 @@
 # 12. Crie um sistema de gerenciamento de biblioteca com busca avançada, empréstimos e controle de multas usando listas e tuplas.
 # Lista de livros: (id, título, autor, ano, gênero, disponível)
 livros = [
-    ("Dom Casmurro", "Machado de Assis", 1899, "Romance", "DIPONÍVEL"),
-    ("O Pequeno Príncipe", "Antoine de Saint-Exupéry", 1943, "Infantil", "DIPONÍVEL"),
-    ("1984", "George Orwell", 1949, "Distopia", "DIPONÍVEL")
+    ("Dom Casmurro", "Machado de Assis", 1899, "Romance", "DISPONÍVEL"),
+    ("O Pequeno Príncipe", "Antoine de Saint-Exupéry", 1943, "Infantil", "DISPONÍVEL"),
+    ("1984", "George Orwell", 1949, "Distopia", "DISPONÍVEL")
 ]
 
 # Lista de usuários: (id, nome, livros_emprestados)
@@ -22,8 +22,8 @@ encerrarSessao = False
 while encerrarSessao == False:
     try:
         print("<------------------------------------------------------------------------------>")
-        opcao = int(input("O que deseja fazer?\nDigite:\n01- Listar Livros;\n02- Inserir Livro;\n03- Excluir Livro;\n04- Atualizar Livro;\n05- Listar Clientes;\n06- Cadastrar Cliente;\n07- Excluir Cliente\n08- Atualizar Cliente\n09- Visualizar Empréstimos;\n10- Cadastrar Empréstimo de Livro;\n11- Cadastrar Devolução de Livro;\n12- Encerrar Sessão.\n-> "))
-        if (1 <= opcao <= 12):
+        opcao = int(input("O que deseja fazer?\nDigite:\n01- Listar Livros;\n02- Inserir Livro;\n03- Excluir Livro;\n04- Atualizar Livro;\n05- Listar Clientes;\n06- Cadastrar Cliente;\n07- Excluir Cliente\n08- Atualizar Cliente\n09- Visualizar Empréstimos;\n10- Cadastrar Empréstimo de Livro;\n11- Cadastrar Devolução de Livro;\n12- Buscar Obra;\n13- Encerrar Sessão.\n-> "))
+        if (1 <= opcao <= 13):
             print("OPÇÃO VÁLIDA!!!")
             # idLivro += 1
             # Listar Livros:
@@ -31,7 +31,7 @@ while encerrarSessao == False:
                 ID = 1
                 print("LIVROS:")
                 for livro in livros:
-                    print("ID:{} | Título: {} | Autor: {} | Ano de Publicação: {} | Genêro do Livro: {} | Situação de Emprestimo: {}".format(ID, livro[0], livro[1], livro[2], livro[3], livro[4]))
+                    print("ID:{} | Título: {} | Autor: {} | Ano de Publicação: {} | Gênero do Livro: {} | Situação de Emprestimo: {}".format(ID, livro[0], livro[1], livro[2], livro[3], livro[4]))
                     ID += 1
 
             # Inserir um livro:
@@ -51,9 +51,9 @@ while encerrarSessao == False:
                             anoValido = True
                         except ValueError:
                             print("Digite apenas numeros!!!")
-                    genero = input("Digite o genêro do livro:\n-> ")
+                    genero = input("Digite o gênero do livro:\n-> ")
                     while (genero.strip() == ""):
-                        genero = input("Digite o genêro do livro:\n-> ")
+                        genero = input("Digite o gênero do livro:\n-> ")
                     valido = True
                 livros.append((nome, autor, ano, genero, "DISPONÍVEL"))
                 # print(livros)
@@ -65,7 +65,7 @@ while encerrarSessao == False:
                     try:
                         excluir = (int(input("Digite o ID do livro que deseja excluir:\n-> ")))
                         excluir = (excluir - 1)
-                        if (0 <= excluir <= (len(livros))):
+                        if (0 <= excluir < (len(livros))):
                             print("ID válido!!!")
                             # idLivro -= 1
                             IDValido = True
@@ -83,7 +83,7 @@ while encerrarSessao == False:
                     try:
                         atualizar = (int(input("Digite o ID do livro que deseja atualizar:\n-> ")))
                         atualizar = (atualizar - 1)
-                        if (0 <= atualizar <= (len(livros))):
+                        if (0 <= atualizar < (len(livros))):
                             print("ID válido!!!")
                             IDValido = True
                             valido = False
@@ -101,9 +101,9 @@ while encerrarSessao == False:
                                         anoValido = True
                                     except ValueError:
                                         print("Digite apenas numeros!!!")
-                                generoAtualizado = input("Digite o genêro do livro:\n-> ")
+                                generoAtualizado = input("Digite o gênero do livro:\n-> ")
                                 while (generoAtualizado.strip() == ""):
-                                    generoAtualizado = input("Digite o genêro do livro:\n-> ")
+                                    generoAtualizado = input("Digite o gênero do livro:\n-> ")
                                 valido = True
                                 livros[atualizar] = ((nomeAtualizado, autorAtualizado, anoAtualizado, generoAtualizado, "DISPONÍVEL"))
                         else:
@@ -152,7 +152,7 @@ while encerrarSessao == False:
                     try:
                         atualizar = (int(input("Digite o ID do cliente que deseja atualizar:\n-> ")))
                         atualizar = (atualizar - 1)
-                        if (0 <= atualizar <= (len(usuarios))):
+                        if (0 <= atualizar < (len(usuarios))):
                             print("ID válido!!!")
                             IDValido = True
                             valido = False
@@ -161,7 +161,7 @@ while encerrarSessao == False:
                                 while (nomeAtualizado.strip() == ""):
                                     nomeAtualizado = input("Digite o nome do cliente:\n-> ")
                                 valido = True
-                                usuarios[atualizar] = ((nomeAtualizado))
+                                usuarios[atualizar] = ((nomeAtualizado, []))
                         else:
                             print("ID inválido!!!")
                     except ValueError:
@@ -184,7 +184,7 @@ while encerrarSessao == False:
                         try:
                             IDCliente = (int(input("Digite o ID do cliente que fez o empréstimo do livro:\n-> ")))
                             IDCliente = (IDCliente - 1)
-                            if (0 <= IDCliente <= (len(usuarios))):
+                            if (0 <= IDCliente < (len(usuarios))):
                                 print("ID do cliente válido!!!")
                                 IDClienteValido = True
                                 while (IDLivroValido == False):
@@ -257,63 +257,121 @@ while encerrarSessao == False:
                 emprestimos.append((nomeCliente, nomeLivro, dataEmprestimo, dataDevolucao))
 
                 # Atualizando a situação do livro:
-                # ("Dom Casmurro", "Machado de Assis", 1899, "Romance", "DIPONÍVEL")
+                # ("Dom Casmurro", "Machado de Assis", 1899, "Romance", "DISPONÍVEL")
                 autorLivro = livros[IDLivro][1]
                 anoPublicacao = livros[IDLivro][2]
                 genero = livros[IDLivro][3]
                 livros[IDLivro] = ((nomeLivro, autorLivro, anoPublicacao, genero, "INDISPONÍVEL"))
 
-
+            # Cadastrar devolução da obra:
             elif (opcao == 11):
                 IDEmprestimoValido = False
                 while (IDEmprestimoValido == False):
                     try:
-                        IDDoEmprestimo = (int(input("Digite o ID do cliente que fez o empréstimo do livro:\n-> ")))
+                        IDDoEmprestimo = (int(input("Digite o ID do empréstimo do livro:\n-> ")))
                         IDDoEmprestimo = (IDDoEmprestimo - 1)
-                        if (0 <= IDDoEmprestimo <= (len(usuarios))):
+                        if (0 <= IDDoEmprestimo < (len(usuarios))):
                             print("ID do emprestimo válido!!!")
-                            IDClienteValido = True
-                            verificado = False
-                            while (verificado == False):
-                                diaD = (int(input("Digite o dia que o cliente pegou o livro: ")))
-                                mesD = (int(input("Digite o mês que o cliente pegou o livro: ")))
-                                anoD = (int(input("Digite o ano que o cliente pegou o livro: ")))
+                            IDEmprestimoValido = True
+                            if (livros[IDDoEmprestimo][4] == "INDISPONÍVEL"):
+                                verificado = False
+                                while (verificado == False):
+                                    diaD = (int(input("Digite o dia que o cliente devolveu o livro: ")))
+                                    mesD = (int(input("Digite o mês que o cliente devolveu o livro: ")))
+                                    anoD = (int(input("Digite o ano que o cliente devolveu o livro: ")))
 
-                                dataDeDevolucao = ("válida")
-                                if ((diaD <= 30) and (mesD == 4 or mesD == 6 or mesD == 9 or mesD == 11)):
                                     dataDeDevolucao = ("válida")
-                                elif (diaD <= 31) and (mesD == 1 or mesD == 3 or mesD == 5 or mesD == 7 or mesD == 8 or mesD == 10 or mesD == 12):
-                                    dataDeDevolucao = ("válida")
-                                elif ((diaD <= 29) and (mesD == 2)and ((anoD % 400 == 0) or (anoD % 4 == 0 and anoD % 100 != 0))):
-                                    dataDeDevolucao = ("válida")
-                                elif ((diaD <= 28) and (mesD == 2) and ((anoD % 400 != 0) or (anoD % 4 == 0 and anoD % 100 != 0))):
-                                    dataDeDevolucao = ("válida")
-                                else:
-                                    dataDeDevolucao = ("inválida")
+                                    if ((diaD <= 30) and (mesD == 4 or mesD == 6 or mesD == 9 or mesD == 11)):
+                                        dataDeDevolucao = ("válida")
+                                    elif (diaD <= 31) and (mesD == 1 or mesD == 3 or mesD == 5 or mesD == 7 or mesD == 8 or mesD == 10 or mesD == 12):
+                                        dataDeDevolucao = ("válida")
+                                    elif ((diaD <= 29) and (mesD == 2)and ((anoD % 400 == 0) or (anoD % 4 == 0 and anoD % 100 != 0))):
+                                        dataDeDevolucao = ("válida")
+                                    elif ((diaD <= 28) and (mesD == 2) and ((anoD % 400 != 0) or (anoD % 4 == 0 and anoD % 100 != 0))):
+                                        dataDeDevolucao = ("válida")
+                                    else:
+                                        dataDeDevolucao = ("inválida")
 
-                                if (dataDeDevolucao == ("válida")):
-                                    verificado = True
-                                else:
-                                    print("A data {}/{}/{} NÃO É VÁLIDA!!!".format(diaF, mesF, anoF))
+                                    if (dataDeDevolucao == ("válida")):
+                                        verificado = True
+                                    else:
+                                        print("A data {}/{}/{} NÃO É VÁLIDA!!!".format(diaF, mesF, anoF))
+
+                                    dataDeEmprestimoEsperada = emprestimos[IDDoEmprestimo][3]
+                                    diaEstimado = ("{}{}".format(dataDeEmprestimoEsperada[0], dataDeEmprestimoEsperada[1]))
+                                    diaEstimado = (int(diaEstimado))
+                                    mesEstimado = ("{}{}".format(dataDeEmprestimoEsperada[3], dataDeEmprestimoEsperada[4]))
+                                    mesEstimado = (int(mesEstimado))
+                                    anoEstimado = ("{}{}{}{}".format(dataDeEmprestimoEsperada[6], dataDeEmprestimoEsperada[7], dataDeEmprestimoEsperada[8], dataDeEmprestimoEsperada[9]))
+                                    anoEstimado = (int(anoEstimado))
+
+                                    if ((diaD > diaEstimado) or (mesD > mesEstimado) or (anoD > anoEstimado)):
+                                        print("O cliente devolveu o livro com atraso!!!")
+                                        print("A data de devolução era: {}/{}/{}!!!".format(diaEstimado, mesEstimado, anoEstimado))
+
+                                    nomeLivro = emprestimos[IDDoEmprestimo[1]]
+                                    for livro in livros:
+                                        if (livro[0] == nomeLivro):
+                                            livro = ((livro[0], livro[1], livro[2], livro[3], livro[4], "DISPONÍVEL"))
+                                            del livro
+                                            livros.append(livro)
+                                    for emprestimo in usuarios:
+                                        if (usuarios[])
+
+                            else:
+                                print("O livro não foi emprestado!!!")
                         else:
                             print("ID do cliente inválido!!!")
                     except ValueError:
                         print("Digite apenas números!!!")
 
-
-                dataDeEmprestimoEsperada = emprestimo[IDDoEmprestimo][3]
-                diaEstimado = ("{}{}".format(dataDeEmprestimoEsperada[0], dataDeEmprestimoEsperada[1]))
-                diaEstimado = (int(diaEstimado))
-                mesEstimado = ("{}{}".format(dataDeEmprestimoEsperada[3], dataDeEmprestimoEsperada[4]))
-                mesEstimado = (int(mesEstimado))
-                anoEstimado = ("{}{}".format(dataDeEmprestimoEsperada[6], dataDeEmprestimoEsperada[7]))
-                anoEstimado = (int(anoEstimado))
-
-                if ((diaD > diaEstimado) or (mesD > mesEstimado) or (anoD > anoEstimado)):
-                    print("O cliente devolveu o livro com atraso!!!")
-                    print("A data de devolução era: {}/{}/{}!!!".format(diaEstimado, mesEstimado, anoEstimado))
-
+            # Buscar Obra:
             elif (opcao == 12):
+                valido = False
+                while (valido == False):
+                    try:
+                        opcao = (int(input("Você deseja filtrar a obra pelo:\nDigite:\n1- Autor;\n2- Ano de publicação;\n3- Gênero.\n-> ")))
+                        if (1 <= opcao <= 3):
+                            print("Opção válida!!!")
+                            valido = True
+                        else:
+                            print("Opção inválida!!! Digite 1, 2 ou 3")
+                    except ValueError:
+                        print("Digite apenas números!!!")
+
+                if (opcao == 1):
+                    autor = (input("Digite o nome do autor:\n-> "))
+                    while (autor.strip() == ""):
+                        autor = (input("Digite o nome do autor:\n-> "))
+                    for livro in livros:
+                        if (livro[1].lower() == autor.lower()):
+                            print("Título: {} | Autor: {} | Ano de Publicação: {} | Gênero do Livro: {} | Situação de Emprestimo: {}".format(livro[0], livro[1], livro[2], livro[3], livro[4]))
+                
+                elif (opcao == 2):
+                    valido = False
+                    while (valido == False):
+                        try:
+                            ano = int(input("Digite o nome do autor:\n-> "))
+                            while (ano.strip() == ""):
+                                ano = int(input("Digite o nome do autor:\n-> "))
+                            valido = True
+                            for livro in livros:
+                                if (livro[2] == ano):
+                                    print("Título: {} | Autor: {} | Ano de Publicação: {} | Gênero do Livro: {} | Situação de Emprestimo: {}".format
+                                    (livro[0], livro[1], livro[2], livro[3], livro[4]))
+                        except ValueError:
+                            print("Digite apenas números!!!")
+
+                elif (opcao == 3):
+                    genero = (input("Digite o gênero da obra:\n-> "))
+                    while (genero.strip() == ""):
+                        genero = (input("Digite o gênero da obra:\n-> "))
+                    for livro in livros:
+                        if (livro[3].lower() == genero.lower()):
+                            print("Título: {} | Autor: {} | Ano de Publicação: {} | Gênero do Livro: {} | Situação de Emprestimo: {}".format(livro[0], livro[1], livro[2], livro[3], livro[4]))
+
+            # Finalizar Sessão:
+            elif (opcao == 13):
                 print("OK!!!")
                 print("Foi ótimo ter você conosco!!!")
                 encerrarSessao = True
