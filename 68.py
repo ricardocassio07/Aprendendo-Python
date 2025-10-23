@@ -1,4 +1,4 @@
-# 6. Desenvolva um algoritmo de busca binária usando range para otimizar a busca.
+# 68. Desenvolva um algoritmo de busca binária usando range para otimizar a busca.
 valores = []
 
 def buscaBinaria():

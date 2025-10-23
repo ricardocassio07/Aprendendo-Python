@@ -1,4 +1,4 @@
-# 1. Crie uma função que gere uma sequência personalizada usando range com diferentes parâmetros.
+# 63. Crie uma função que gere uma sequência personalizada usando range com diferentes parâmetros.
 
 p = (int(input("Digite um número inteiro: ")))
 p2 = (int(input("Digite outro número inteiro: ")))

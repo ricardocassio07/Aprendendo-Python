@@ -1,4 +1,4 @@
-# 2. Implemente um gerador de progressões aritméticas e geométricas usando range de forma criativa.
+# 64. Implemente um gerador de progressões aritméticas e geométricas usando range de forma criativa.
 def progressao():   
     verificado = False
     while (verificado == False):

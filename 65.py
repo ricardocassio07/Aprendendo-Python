@@ -1,4 +1,4 @@
-# 3. Desenvolva um sistema de paginação usando range para dividir listas grandes.
+# 65. Desenvolva um sistema de paginação usando range para dividir listas grandes.
 
 lista = []
 for i in range(1, 51):

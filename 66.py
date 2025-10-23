@@ -1,4 +1,4 @@
-# 4. Crie um sistema de indexação reversa para processar dados em diferentes direções.
+# 66. Crie um sistema de indexação reversa para processar dados em diferentes direções.
 frases = {}
 indice_reverso = {}
 index = 0
