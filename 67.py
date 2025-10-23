@@ -1,0 +1,1 @@
+# 5; Implemente um gerador de coordenadas para grade 2D usando range aninhado.
