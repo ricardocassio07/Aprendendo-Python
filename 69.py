@@ -40,6 +40,8 @@ horas = 0
 
 # Crônometro:
 for i in range(1, (tempoTotal + 1)):
+    # Esperar 1 segundo para mostrar o próximo valor:
+    time.sleep(1)
     # Adicionar nos contadores
     segundos += 1
     if ((i > 0) and ((i % 60) == 0)):
@@ -60,6 +62,4 @@ for i in range(1, (tempoTotal + 1)):
         H = ("0" + H)
     # Mostrar:
     print("{0}:{1}:{2}".format(H, M, S))
-    # Esperar 1 segundo para mostrar o próximo valor:
-    time.sleep(1)
 
