@@ -1,67 +1,93 @@
 '''
-    1: Crie uma função que receba uma lista de valores (que podem ser números, strings ou
-    outros tipos) e retorne uma nova lista contendo apenas os números primos válidos. A
-    função deve tratar exceções para valores inválidos e usar estruturas condicionais para
-    validação.
+    73: Desenvolva um sistema de autenticação que permita ao usuário fazer login com
+    tentativas limitadas. O sistema deve ter diferentes níveis de usuário e implementar
+    bloqueio temporário após falhas consecutivas.
 Requisitos técnicos:
-    - Use try-except para tratar conversões inválidas
-    - Implemente verificação de primo com for e range
-    - Use if-elif-else para diferentes casos de validação
-    - A função deve aceitar qualquer iterável como entrada
-Exemplo:
-    entrada = [2, 3, "4", 5, "abc", 7.0, 11, "13", None, 17]
-    saida_esperada = [2, 3, 5, 7, 11, 13, 17] 
+    - Use while para controlar o loop de tentativas
+    - Implemente try-except para tratamento de entrada
+    - Use if-elif-else para diferentes níveis de acesso
+    - Use range para controlar tempo de bloqueio
+    - Crie função para validação de credenciais
 '''
+import time
+# Criação dos usuários e das senhas:
+usuarios = {
+    "carlos":(78809, "gerente"),
+    "maria":(90876, "vendedor"),
+    "josé":(90789, "vendedor"),
+    "pedro":(35671, "auxiliar"),
+    "enrique":(81792, "auxiliar")
+}
 
-def lista():
-    # Criação da lista:
-    lista = []
-    # Inserção do conteúdo:
-    continuar = True
-    while continuar:
-        valor = (input("Digite o conteúdo que deseja inserir inserir na lista:\n-> "))
-        lista.append(valor)
-        valido = False
-        while (valido == False):
-            try:
-                opcao = (int(input("Você deseja inserir mais algum conteúdo na lista?\nDigite:\n1 - Sim\n2 - Não\n-> ")))
-                if (1 <= opcao <= 2):
-                    valido = True
-                    if (opcao == 2):
-                        print("Ok! Vamos para a próxima etapa!")
-                        continuar = False
-                else:
-                    print("DIGITE: 1- SIM OU 2- NÃO!!!")
-            except:
-                print("VOCÊ DEVE DIGITAR APENAS NÚMEROS!!!")
-    # print(lista)
-    # Criação da lista para armazenar os númmeros primos:
-    lista_primos = []
-    # Verificar quais valores são números primos:
-    for posicao in range(len(lista)):
+# Função para verifcar credenciais:
+def verificarCargo(usuario, lista = usuarios):
+    global tentativas
+    verificado = False
+    while (verificado == False):
         try:
-            num = lista[posicao]
-            # print(num)
-            num = int(num)
-            # print(num)
-            numero_de_divisores = 0
-            if (num > 1):
-                for divisor in range(2, num):
-                    # print(divisor)
-                    if ((num % divisor) == 0):
-                        numero_de_divisores += 1
-                if (numero_de_divisores == 0):
-                    lista_primos.append(num)
+            cargo = (int(input("Qual o seu ccargo?\nDigite:\n1- Gerente\n2- Vendedor\n3- Auxilizar\n-> ")))
+            if (1 <= cargo <= 3):
+                verificado = True
+                if (cargo == 1):
+                    opcao = "gerente"
+                elif (cargo == 2):
+                    opcao = "vendedor"
+                elif (cargo == 3):
+                    opcao = "auxiliar"
+                if (usuarios[usuario][1] == opcao):
+                    print("OPÇÃO VÁLIDA!!!")
+                    print("SEJA MUITO BEM-VINDO(A), {}!".format(usuario))
+                    tentativas = 6
                 else:
-                    print("O NÚMERO {0} NÃO É PRIMO!".format(num))
-            elif (num == 1):
-                print("O NÚMERO 1 NÃO É PRIMO!!!")
-            elif (num < 0):
-                print("NÚMEROS NEGATIVOS NÃO SÃO PRIMOS!!!")
-        except:
-            print("O VALOR '{0}' NÃO É UM NÚMERO!!!".format(lista[posicao]))
-    # Retorna lista com os números primos:
-    return lista_primos
+                    print("OPÇÃO INVÁLIDA!!!")
+                    segundos = 0
+                    for i in range(1, 6):
+                        time.sleep(1)
+                        if (i == 1):
+                            print("ESPERE...")
+                        h = "00"
+                        m = "00"
+                        segundos += 1
+                        segundo = ("0{}".format(segundos))
+                        print("{0}:{1}:{2}".format(h, m, segundo))
+            else:
+                print("DIGITE 1, 2 OU 3!!!")
+        except ValueError:
+            print("DIGITE APENAS NÚMEROS!!!")
 
-resultado = lista()
-print(resultado)
+# Inserção:
+num_de_tentativas = 5
+tentativas = 1
+while (tentativas <= num_de_tentativas):
+    u = (input("Digite o usuário:\n-> "))
+    u = u.strip()
+    while True:
+        try:
+            s = (input("Digite a senha:\n-> "))
+            s = s.strip()
+            if (len(s) != 5):
+                    print("A SENHA POSSUI 5 DÍGITOS!!!")
+            else:
+                s = int(s)
+                break
+        except ValueError:
+            print("A SENHA É TOTALMENTE NÚMERICA!!!")
+    if (u in usuarios and (usuarios[u][0] == s)):
+        print("USUÁRIO E SENHA VÁLIDOS!!!")
+        verificarCargo(u)
+    else:
+        if(tentativas == 5):
+            print("SUAS TENTATIVAS ACABARAM! POR FAVOR, INICIE O PROGRAMA NOVAMENTE!")
+        else:
+            print("USUÁRIO OU SENHA INVÁLIDO!!!")
+            segundos = 0
+            for i in range(1, 6):
+                time.sleep(1)
+                if (i == 1):
+                    print("ESPERE...")
+                h = "00"
+                m = "00"
+                segundos += 1
+                segundo = ("0{}".format(segundos))
+                print("{0}:{1}:{2}".format(h, m, segundo))
+    tentativas += 1
