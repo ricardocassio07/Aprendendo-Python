@@ -15,6 +15,10 @@
     -> Persistência de dados em arquivos;
     -> Interface interativa com menus paginados.
 '''
+# Vetor que armazena vetores, sendo cada um deles responsável por armazenar as obras em ordem alfabética, sendo o primeiro resposável por armazenar as obras com que se iniciam com a letra 'a' e o penúltimo com a letra 'z', o último vetor irá armazenar as obras com início numérico:
+obras = [[], [], [], [], [],[], [], [], [], [],[], [], [], [], [],[], [], [], [], [],[], [], [], [], [], [], []]
+usuário = [[], [], [], [], [],[], [], [], [], [],[], [], [], [], [],[], [], [], [], [],[], [], [], [], [], []]
+emprestimos = []
 print()
 print("----------- SISTEMA BIBLIOTECÁRIO -----------")
 print("---------- SEJA MUITO BEM-VINDO(A) ----------")
