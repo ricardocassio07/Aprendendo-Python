@@ -50,7 +50,7 @@ obras = {
     "Z": [],
     "NUM": [("1984", "George Orwell", 1949, "Distopia", "DISPONÍVEL")]
 }
-usuario = {
+usuarios = {
     "A": [],
     "B": [],
     "C": [],
@@ -82,7 +82,7 @@ usuario = {
 emprestimos = []
 
 
-def verificarPermanencia():             
+def verificar():             
     verificado = False
     while (verificado == False):
         try:
@@ -93,8 +93,8 @@ def verificarPermanencia():
             "-> "
             )))
             if (1 <= continuarNaSecao <= 2):
+                verificado = True
                 if (continuarNaSecao == 2):
-                    verificado = True
                     return False
                 else:
                     return True
@@ -145,7 +145,7 @@ while (continuar_no_sistema == True):
                         "4- EXCLUIR OBRA\n"\
                         "-> "
                         )))
-                        if (1 <= desejoObra <= 4):
+                        if (1 <= desejoObra <= 6):
                             verificado = True
                         else:
                             print("-> DESEJO INVÁLIDO <-")
@@ -156,8 +156,8 @@ while (continuar_no_sistema == True):
                 if (desejoObra == 1):
                     # Mostrar obras catálogadas
                     print("--------------- MOSTRAR OBRA ---------------")
-                    pararDeMostrarObras = False
-                    while (pararDeMostrarObras == False):
+                    continuarMostrarObras = True
+                    while (continuarMostrarObras == True):
                         verificado = False
                         while (verificado == False):
                             try:
@@ -307,7 +307,7 @@ while (continuar_no_sistema == True):
                                             print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra[4]))
 
                         print("VOCÊ DESEJA CONTINUAR BUSCANDO POR ALGUMA OBRA CATÁLOGADA:")
-                        pararDeMostrarObras = verificarPermanencia()
+                        continuarMostrarObras = verificar()
 
 
 
@@ -315,8 +315,8 @@ while (continuar_no_sistema == True):
                 elif (desejoObra == 2):
                     # INSERIR OBRA
                     print("--------------- INSERIR OBRA ---------------")
-                    pararDeInserirObras = False
-                    while (pararDeInserirObras == False):
+                    continuarInserirObras = True
+                    while (continuarInserirObras ==True):
                         verificado = False
                         while (verificado == False):
                             nomeObra = (input("INSIRA O NOME DA OBRA:\n-> "))
@@ -358,8 +358,8 @@ while (continuar_no_sistema == True):
                                 print("-> DESEJO INVÁLIDO <-")
 
 
-                        obra = (nomeObra, nomeAutor, ano, "DISPONÍVEL")
-                        # print(obra)
+                        obra = (nomeObra, nomeAutor, ano, genero, "DISPONÍVEL")
+                        print(obra)
                         # print(obra[0])
                         for inicial in obras:
                             if (inicial.upper() in letras):
@@ -371,13 +371,13 @@ while (continuar_no_sistema == True):
                                 # print(obras["NUM"])
                         
                         print("VOCÊ DESEJA INSERIR MAIS ALGUMA OBRA:")
-                        pararDeInserirObras = verificarPermanencia()
+                        continuarInserirObras = verificar()
                     
                 elif (desejoObra == 3):
                     # MODIFICAR OBRA
                     print("-------------- MODIFICAR OBRA --------------")
-                    pararDeModificarObras = False
-                    while (pararDeModificarObras == False):
+                    continuarModificarObras = True
+                    while (continuarModificarObras == True):
                         verificado = False
                         while (verificado == False):
                             try:
@@ -483,14 +483,14 @@ while (continuar_no_sistema == True):
                             obras[inicial].insert(codigoObra - 1, obraModificada)
 
                         
-                        print("VOCÊ DESEJA MODIFICAR MAIS ALGUMA OBRA:")
-                        pararDeModificarObras = verificarPermanencia()
+                    print("VOCÊ DESEJA MODIFICAR MAIS ALGUMA OBRA:")
+                    continuarModificarObras = verificar()
 
                 elif (desejoObra == 4):
                     # EXCLUIR OBRA
                     print("--------------- EXCLUIR OBRA ---------------")
-                    pararDeModificarObras = False
-                    while (pararDeModificarObras == False):
+                    continuarExcluirObras = True
+                    while (continuarExcluirObras == True):
                         verificado = False
                         while (verificado == False):
                             try:
@@ -510,7 +510,7 @@ while (continuar_no_sistema == True):
                         if (opcao == 1):
                             verificado = False
                             while (verificado == False):
-                                inicial = (input("DIGITE A LETRA INICIAL DA OBRA:\n-> "))
+                                inicial = (input("DIGITE A LETRA INICIAL DO NOME DA OBRA:\n-> "))
                                 # Ajustando a letra para maiúsculo:
                                 inicial = inicial.upper()
                                 if (inicial in letras):
@@ -569,27 +569,28 @@ while (continuar_no_sistema == True):
                                 print("-> DIGITE APENAS NÚMEROS <-")
 
                         print("VOCÊ DESEJA EXCLUIR MAIS ALGUMA OBRA:")
-                        pararDeModificarObras = verificarPermanencia()
-                    
-                continuarGerenciarObras = verificarPermanencia()
+                        continuarExcluirObras = verificar()
+                
+                print("DESEJA CONTINUAR GERENCIANDO AS OBRAS:")
+                continuarGerenciarObras = verificar()
                 
 
         # Gerenciar usuários:
         elif (desejo == 2):
-            print("\n---------- GERENCIADOR DE USUÁRIOS ----------")
+            print("---------- GERENCIADOR DE USUÁRIOS ----------")
             continuarGerenciarUsuarios = True
             while (continuarGerenciarUsuarios == True):
                 verificado = False
                 while (verificado == False):
                     try:
-                        desejoObra = (int(input("O QUE DESEJA:\n"\
+                        desejoUser = (int(input("O QUE DESEJA:\n"\
                         "DIGITE:\n"\
                         "1- VISUALIZAR USUÁRIOS CADASTRADAS\n"\
                         "2- CADASTRAR USUÁRIO\n"\
                         "3- MODIFICAR AS INFORMAÇÕES DE ALGUM USUÁRIO\n"
                         "-> "
                         )))
-                        if (1 <= desejoObra <= 3):
+                        if (1 <= desejoUser <= 4):
                             verificado = True
                         else:
                             print("-> DESEJO INVÁLIDO <-")
@@ -597,28 +598,308 @@ while (continuar_no_sistema == True):
                         print("-> DIGITE APENAS NÚMEROS! <-")
 
                     
-                if (desejoObra == 1):
+                if (desejoUser == 1):
                     # Mostrar usuários cadastrados
-                    print("Mostrar usuários cadastrados")
-                elif (desejoObra == 2):
-                    # Cadastrar usuário, pedir nome, cpf, blá blá
-                    print("Cadastrar usuário, pedir nome, cpf, blá blá")
-                elif (desejoObra == 3):
-                    # Digite o cpf do usuário, modificar nome, modificar email, modificar data de nascimento
-                    print("Digite o cpf do usuário, modificar nome, modificar email, modificar data de nascimento")
+                    print("----------- USUÁRIOS CADASTRADOS -----------")
+                    continuarVisualizarUsuarios = True
+                    while (continuarVisualizarUsuarios == True):
+                        verificado = False
+                        while (verificado == False):
+                            inicial = (input("DIGITE A LETRA INICIAL DO NOME DO USUÁRIO:\n-> "))
+                            # Ajustando a letra para maiúsculo:
+                            inicial = inicial.upper()
+                            if (inicial in letras):
+                                verificado = True
+                            else:
+                                print("-> DESEJO INVÁLIDO <-")
+
+                        codigo = 0
+                        if len(usuarios[inicial]) == 0:
+                            print("-> AINDA NÃO FORAM CADASTRADAS NENHUM USUÁRIO <-")
+                        else:
+                            print("USUÁRIOS CADASTRADOS COM A LETRA '{}':".format(inicial))
+                            for usuario in usuarios[inicial]:
+                                cpf = usuario[0]
+                                print("----------------------------------------------")
+                                print("CPF: {0}{1}{2}.{3}{4}{5}.{6}{7}{8}-{9}{10}".format(cpf[0], cpf[1], cpf[2], cpf[3], cpf[4], cpf[5], cpf[6], cpf[7], cpf[8], cpf[9], cpf[10]))
+                                print("NOME: {}".format(usuario[1]))
+                                print("DATA DE NASCIMENTO: {}".format(usuario[2]))
+                                print("OBRAS ALUGADAS: {}")
+                                # for emprestimo in emprestimos:
+
+                        print("DESEJA CONTINUAR VISUALIZANDO OS USUÁRIOS CADASTRADOS:")
+                        continuarVisualizarUsuarios = verificar()
+
+                elif (desejoUser == 2):
+                    # Cadastrar Usuário:
+                    print("------------ CADASTRAR USUÁRIO ------------")
+                    continuarCadastrarUsuario = True
+                    while (continuarCadastrarUsuario == True):
+                        verificado = False
+                        while (verificado == False):
+                            try:
+                                CPF = (int(input("DIGITE O CPF DO USUÁRIO (SEM TRAÇOS OU PONTOS):\n-> ")))
+                                CPF = str(CPF)
+                                if (len(CPF) == 11):
+                                    n1 = CPF[0]
+                                    n1 = int(n1)
+                                    n2 = CPF[1]
+                                    n2 = int(n2)
+                                    n3 = CPF[2]
+                                    n3 = int(n3)
+                                    n4 = CPF[3]
+                                    n4 = int(n4)
+                                    n5 = CPF[4]
+                                    n5 = int(n5)
+                                    n6 = CPF[5]
+                                    n6 = int(n6)
+                                    n7 = CPF[6]
+                                    n7 = int(n7)
+                                    n8 = CPF[7]
+                                    n8 = int(n8)
+                                    n9 = CPF[8]
+                                    n9 = int(n9)
+                                    n10 = CPF[9]
+                                    n10 = int(n10)
+                                    n11 = CPF[10]
+                                    n11 = int(n11)
+                                    if (n1 == n2 == n3 == n4 == n5 == n6 == n7 == n8 == n9 == n10 == n11):
+                                        print("CPF INVÁLIDO!!! ELE NÃO PODE SER UMA SEQUÊNCIA JÁ CONHECIDA!!!")
+                                    else:
+                                        digito10 = ((n1 * 10) + (n2 * 9) + (n3 * 8) + (n4 * 7) + (n5 * 6) + (n6 * 5) + (n7 * 4) + (n8 * 3) + (n9 * 2))
+                                        r = (digito10 % 11)
+                                        if (r < 2):
+                                            digito10 = 0
+                                        else:
+                                            digito10 = (11 - r)
+                                        digito11 = ((n1 * 11) + (n2 * 10) + (n3 * 9) + (n4 * 8) + (n5 * 7) + (n6 * 6) + (n7 * 5) + (n8 * 4) + (n9 * 3) + (n10 * 2))
+                                        r = (digito11 % 11)
+                                        if (r < 2):
+                                            digito11 = 0
+                                        else:
+                                            digito11 = (11 - r)
+
+                                        if ((n10 != digito10) or (n11 != digito11)):
+                                            print("CPF INVÁLIDO!!!")
+                                        else:
+                                            verificado = True
+                                else:
+                                    print("O CPF É INVÁLIDO, POIS ELE DEVE CONTER EXATAMENTE 11 DIGITOS!!!")
+                            except ValueError:
+                                print("DIGITE APENAS NÚMEROS!!!")
+
+                        existe = False
+                        for inicial in usuarios:
+                            for usuario in usuarios[inicial]:
+                                if (usuario[0] == CPF):
+                                    existe = True
+                                    break
+                            if (existe == True):
+                                break
+
+                        if (existe == True):
+                            print("-> USUÁRIO JÁ CADASTRADO <-")
+                        else:
+                            verificado = False
+                            while (verificado == False):
+                                nomeUsuario = (input("DIGITE O NOME DO USUÁRIO:\n-> "))
+                                nomeUsuario = nomeUsuario.strip()
+                                nomeUsuario = nomeUsuario.title()
+                                if (len(nomeUsuario) > 0):
+                                    verificado = True
+                                else:
+                                    print("-> DESEJO INVÁLIDO <-")
+
+                            verificado = False
+                            while (verificado == False):
+                                try:
+                                    print("DIGITE A DATA DE NASCIMENTO DO USUÁRIO: ")
+                                    diaNascimento = (int(input("DIGITE O DIA: ")))
+                                    mesNascimento = (int(input("DIGITE O MÊS: ")))
+                                    anoNascimento = (int(input("DIGITE O ANO: ")))
+
+                                    if (anoNascimento > 0):
+                                        if ((diaNascimento <= 30) and (mesNascimento == 4 or mesNascimento == 6 or mesNascimento == 9 or mesNascimento == 11)):
+                                            verificado = True
+                                        elif (diaNascimento <= 31) and (mesNascimento == 1 or mesNascimento == 3 or mesNascimento == 5 or mesNascimento == 7 or mesNascimento == 8 or mesNascimento == 10 or mesNascimento == 12):
+                                            verificado = True
+                                        elif ((diaNascimento <= 29) and (mesNascimento == 2)and (anoNascimento % 4 == 0)):
+                                            verificado = True
+                                        elif ((diaNascimento <= 28) and (mesNascimento == 2) and (anoNascimento % 4 != 0)):
+                                            verificado = True
+                                        else:
+                                            print("-> DATA INVÁLIDA <-")
+                                    else:
+                                        print("-> DATA INVÁLIDA <-")
+                                except ValueError:
+                                    print("-> DIGITE APENAS NÚMEROS <-")
+
+                            diaNascimento = str(diaNascimento)
+                            if (len(diaNascimento) == 1):
+                                diaNascimento = ("0" + diaNascimento)
+
+                            mesNascimento = str(mesNascimento)
+                            if (len(mesNascimento) == 1):
+                                mesNascimento = ("0" + mesNascimento)
+
+                            anoNascimento = str(anoNascimento)
+
+                            dataNascimento = (diaNascimento + "/" + mesNascimento + "/" + anoNascimento)
+
+                            inicialNomeUser = (nomeUsuario[0])
+
+                            usuarios[inicialNomeUser].append((CPF, nomeUsuario, dataNascimento))
+
+                        print("DESEJA CONTINUAR CADASTRANDO NOVOS USUÁRIOS:")
+                        continuarCadastrarUsuario = verificar()
+
+                elif (desejoUser == 3):
+                    # Modificar usuário:
+                    print("------------ MODIFICAR USUÁRIO ------------")
+                    continuarModificarUsuarios = True
+                    while (continuarModificarUsuarios == True):
+                        verificado = False
+                        while (verificado == False):
+                            try:
+                                cpfU = (int(input("DIGITE O CPF DO USUÁRIO (SEM TRAÇOS OU PONTOS):\n-> ")))
+                                cpfU = str(cpfU)
+                                if (len(cpfU) == 11):
+                                    verificado = True
+                                else:
+                                    print("-> DESEJO INVÁLIDO <-")
+                            except ValueError:
+                                print("-> DIGITE APENAS NÚMEROS <-")
+
+                        userCadastrado = False
+                        for inicial in usuarios:
+                            index = -1
+                            for usuario in usuarios[inicial]:
+                                index += 1
+                                if (usuario[0] == cpfU):
+                                    cpf = usuario[0]
+                                    print("----------------------------------------------")
+                                    print("CPF: {0}{1}{2}.{3}{4}{5}.{6}{7}{8}-{9}{10}".format(cpf[0], cpf[1], cpf[2], cpf[3], cpf[4], cpf[5], cpf[6], cpf[7], cpf[8], cpf[9], cpf[10]))
+                                    print("NOME: {}".format(usuario[1]))
+                                    print("DATA DE NASCIMENTO: {}".format(usuario[2]))
+                                    userCadastrado = True
+                                    break
+                            if (userCadastrado == True):
+                                break
+
+                        if (userCadastrado == False):
+                            print("-> USUÁRIO NÃO CADASTRADO <-")
+                        else:
+                            del usuarios[inicial][index]
+                            verificado = False
+                            while (verificado == False):
+                                nomeUsuario = (input("DIGITE O NOME DO USUÁRIO:\n-> "))
+                                nomeUsuario = nomeUsuario.strip()
+                                nomeUsuario = nomeUsuario.title()
+                                if (len(nomeUsuario) > 0):
+                                    verificado = True
+                                else:
+                                    print("-> DESEJO INVÁLIDO <-")
+
+                            verificado = False
+                            while (verificado == False):
+                                try:
+                                    print("DIGITE A DATA DE NASCIMENTO DO USUÁRIO: ")
+                                    diaNascimento = (int(input("DIGITE O DIA: ")))
+                                    mesNascimento = (int(input("DIGITE O MÊS: ")))
+                                    anoNascimento = (int(input("DIGITE O ANO: ")))
+
+                                    if (anoNascimento > 0):
+                                        if ((diaNascimento <= 30) and (mesNascimento == 4 or mesNascimento == 6 or mesNascimento == 9 or mesNascimento == 11)):
+                                            verificado = True
+                                        elif (diaNascimento <= 31) and (mesNascimento == 1 or mesNascimento == 3 or mesNascimento == 5 or mesNascimento == 7 or mesNascimento == 8 or mesNascimento == 10 or mesNascimento == 12):
+                                            verificado = True
+                                        elif ((diaNascimento <= 29) and (mesNascimento == 2)and (anoNascimento % 4 == 0)):
+                                            verificado = True
+                                        elif ((diaNascimento <= 28) and (mesNascimento == 2) and (anoNascimento % 4 != 0)):
+                                            verificado = True
+                                        else:
+                                            print("-> DATA INVÁLIDA <-")
+                                    else:
+                                        print("-> DATA INVÁLIDA <-")
+                                except ValueError:
+                                    print("-> DIGITE APENAS NÚMEROS <-")
+
+                            diaNascimento = str(diaNascimento)
+                            if (len(diaNascimento) == 1):
+                                diaNascimento = ("0" + diaNascimento)
+
+                            mesNascimento = str(mesNascimento)
+                            if (len(mesNascimento) == 1):
+                                mesNascimento = ("0" + mesNascimento)
+
+                            anoNascimento = str(anoNascimento)
+
+                            dataNascimento = (diaNascimento + "/" + mesNascimento + "/" + anoNascimento)
+
+                            inicialNomeUser = (nomeUsuario[0])
+
+                            usuarios[inicialNomeUser].append((cpfU, nomeUsuario, dataNascimento))
+
+
+                    print("DESEJA MODIFICAR OS DADOS DE MAIS ALGUM USÁRIO:")
+                    continuarModificarUsuarios = verificar()
+                                    
     
-                continuarGerenciarUsuarios = verificarPermanencia()
+                elif (desejoUser == 4):
+                    # Excluir usuário:
+                    print("------------- EXCLUIR USUÁRIO -------------")
+                    continuarExcluirUsuarios = True
+                    while (continuarExcluirUsuarios == True):
+                        verificado = False
+                        while (verificado == False):
+                            try:
+                                cpfU = (int(input("DIGITE O CPF DO USUÁRIO (SEM TRAÇOS OU PONTOS):\n-> ")))
+                                cpfU = str(cpfU)
+                                if (len(cpfU) == 11):
+                                    verificado = True
+                                else:
+                                    print("-> DESEJO INVÁLIDO <-")
+                            except ValueError:
+                                print("-> DIGITE APENAS NÚMEROS <-")
+
+                        userCadastrado = False
+                        for inicial in usuarios:
+                            index = -1
+                            for usuario in usuarios[inicial]:
+                                index += 1
+                                if (usuario[0] == cpfU):
+                                    cpf = usuario[0]
+                                    print("----------------------------------------------")
+                                    print("CPF: {0}{1}{2}.{3}{4}{5}.{6}{7}{8}-{9}{10}".format(cpf[0], cpf[1], cpf[2], cpf[3], cpf[4], cpf[5], cpf[6], cpf[7], cpf[8], cpf[9], cpf[10]))
+                                    print("NOME: {}".format(usuario[1]))
+                                    print("DATA DE NASCIMENTO: {}".format(usuario[2]))
+                                    userCadastrado = True
+
+                                    print("REALMENTE DESEJA EXCLUIR O USUÁRIO:")
+                                    desejoExcluir = verificar()
+                                    if (desejoExcluir == 1):
+                                        del usuarios[inicial][index]
+                                        # RETIRAR OS EMPRÉSTIMOS CORRESPONDENTES TBM
+                                
+                        if (userCadastrado == False):
+                            print("-> USUÁRIO NÃO CADASTRADO <-")
+
+                        print("DESEJA EXCLUIR MAIS ALGUM USUÁRIO:")
+                        continuarExcluirUsuarios = verificar()
+
+                print("DESEJA CONTINUAR GERENCIANDO OS USUÁRIOS:")
+                continuarGerenciarUsuarios = verificar()
                 
 
         # Gereniar empréstimos:
         elif (desejo == 3):
-            print("\n--------- GERENCIADOR DE EMPRÉSTIMOS ---------")
+            print("--------- GERENCIADOR DE EMPRÉSTIMOS ---------")
             continuarGerenciarEmprestimos = True
             while (continuarGerenciarEmprestimos == True):
                 verificado = False
                 while (verificado == False):
                     try:
-                        desejo = (int(input("O QUE DESEJA:\n"\
+                        desejoEmpres = (int(input("O QUE DESEJA:\n"\
                         "DIGITE:\n"\
                         "1- CADASTRAR EMPRÉSTIMO\n"\
                         "2- CADASTRAR DEVOLUÇÃO\n"\
@@ -631,22 +912,22 @@ while (continuar_no_sistema == True):
                     except ValueError:
                         print("-> DIGITE APENAS NÚMEROS! <-")
 
-                if (desejoObra == 1):
+                if (desejoEmpres == 1):
                     # Cadastrar empréstimo da obra
                     print("Cadastrar empréstimo da obra")
-                elif (desejoObra == 2):
+                elif (desejoEmpres == 2):
                     # Cadastrar devolução da obra
                     print("Cadastrar devolução da obra")
 
                     
-                continuarGerenciarEmprestimos = verificarPermanencia()
+                continuarGerenciarEmprestimos = verificar()
 
         print("DESEJA CONTINUAR NO SISTEMA:")
         # Verifiar se o usuário deseja continuar no programa:   
-        continuar_no_sistema = verificarPermanencia()
+        continuar_no_sistema = verificar()
 
 
     # Verifiar se o usuário deseja continuar no programa:
     else:    
         print("DESEJA CONTINUAR NO SISTEMA:")
-        continuar_no_sistema = verificarPermanencia()
+        continuar_no_sistema = verificar()
