@@ -1,0 +1,305 @@
+{
+    "A": [
+        {
+            "titulo": "A Revolução dos Bichos",
+            "autor": "George Orwell",
+            "ano": 1945,
+            "genero": "Sátira",
+            "status": "DISPONÍVEL"
+        },
+        {
+            "titulo": "A Metamorfose",
+            "autor": "Franz Kafka",
+            "ano": 1915,
+            "genero": "Ficção Existencial",
+            "status": "DISPONÍVEL"
+        },
+        {
+            "titulo": "A Menina que Roubava Livros",
+            "autor": "Markus Zusak",
+            "ano": 2005,
+            "genero": "Drama",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "B": [
+        {
+            "titulo": "Brida",
+            "autor": "Paulo Coelho",
+            "ano": 1990,
+            "genero": "Ficção",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "C": [
+        {
+            "titulo": "Capitães da Areia",
+            "autor": "Jorge Amado",
+            "ano": 1937,
+            "genero": "Romance",
+            "status": "DISPONÍVEL"
+        },
+        {
+            "titulo": "Cem Anos de Solidão",
+            "autor": "Gabriel García Márquez",
+            "ano": 1967,
+            "genero": "Realismo Mágico",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "D": [
+        {
+            "titulo": "Dom Casmurro",
+            "autor": "Machado de Assis",
+            "ano": 1899,
+            "genero": "Romance",
+            "status": "DISPONÍVEL"
+        },
+        {
+            "titulo": "Drácula",
+            "autor": "Bram Stoker",
+            "ano": 1897,
+            "genero": "Terror",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "E": [
+        {
+            "titulo": "Ensaio sobre a Cegueira",
+            "autor": "José Saramago",
+            "ano": 1995,
+            "genero": "Ficção",
+            "status": "DISPONÍVEL"
+        },
+        {
+            "titulo": "Estorvo",
+            "autor": "Chico Buarque",
+            "ano": 1991,
+            "genero": "Romance",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "F": [
+        {
+            "titulo": "Frankenstein",
+            "autor": "Mary Shelley",
+            "ano": 1818,
+            "genero": "Terror",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "G": [
+        {
+            "titulo": "Grande Sertão: Veredas",
+            "autor": "João Guimarães Rosa",
+            "ano": 1956,
+            "genero": "Romance",
+            "status": "DISPONÍVEL"
+        },
+        {
+            "titulo": "Garota Exemplar",
+            "autor": "Gillian Flynn",
+            "ano": 2012,
+            "genero": "Suspense",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "H": [
+        {
+            "titulo": "Harry Potter e a Pedra Filosofal",
+            "autor": "J.K. Rowling",
+            "ano": 1997,
+            "genero": "Fantasia",
+            "status": "DISPONÍVEL"
+        },
+        {
+            "titulo": "Hamlet",
+            "autor": "William Shakespeare",
+            "ano": 1603,
+            "genero": "Tragédia",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "I": [
+        {
+            "titulo": "It: A Coisa",
+            "autor": "Stephen King",
+            "ano": 1986,
+            "genero": "Terror",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "J": [
+        {
+            "titulo": "Jogos Vorazes",
+            "autor": "Suzanne Collins",
+            "ano": 2008,
+            "genero": "Distopia",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "K": [
+        {
+            "titulo": "Kafta na Praia",
+            "autor": "Haruki Murakami",
+            "ano": 2002,
+            "genero": "Ficção",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "L": [
+        {
+            "titulo": "Lolita",
+            "autor": "Vladimir Nabokov",
+            "ano": 1955,
+            "genero": "Romance",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "M": [
+        {
+            "titulo": "Memórias Póstumas de Brás Cubas",
+            "autor": "Machado de Assis",
+            "ano": 1881,
+            "genero": "Romance",
+            "status": "DISPONÍVEL"
+        },
+        {
+            "titulo": "Moby Dick",
+            "autor": "Herman Melville",
+            "ano": 1851,
+            "genero": "Aventura",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "N": [
+        {
+            "titulo": "Neuromancer",
+            "autor": "William Gibson",
+            "ano": 1984,
+            "genero": "Cyberpunk",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "O": [
+        {
+            "titulo": "O Pequeno Príncipe",
+            "autor": "Antoine de Saint-Exupéry",
+            "ano": 1943,
+            "genero": "Infantil",
+            "status": "DISPONÍVEL"
+        },
+        {
+            "titulo": "O Hobbit",
+            "autor": "J.R.R. Tolkien",
+            "ano": 1937,
+            "genero": "Fantasia",
+            "status": "DISPONÍVEL"
+        },
+        {
+            "titulo": "O Processo",
+            "autor": "Franz Kafka",
+            "ano": 1925,
+            "genero": "Ficção",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "P": [
+        {
+            "titulo": "Ponto de Impacto",
+            "autor": "Dan Brown",
+            "ano": 2001,
+            "genero": "Suspense",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "Q": [
+        {
+            "titulo": "Quem é Você, Alasca?",
+            "autor": "John Green",
+            "ano": 2005,
+            "genero": "Drama",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "R": [
+        {
+            "titulo": "Romeu e Julieta",
+            "autor": "William Shakespeare",
+            "ano": 1597,
+            "genero": "Tragédia",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "S": [
+        {
+            "titulo": "Senhor dos Anéis: A Sociedade do Anel",
+            "autor": "J.R.R. Tolkien",
+            "ano": 1954,
+            "genero": "Fantasia",
+            "status": "DISPONÍVEL"
+        },
+        {
+            "titulo": "Sapiens",
+            "autor": "Yuval Noah Harari",
+            "ano": 2011,
+            "genero": "História",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "T": [
+        {
+            "titulo": "Todo Dia",
+            "autor": "David Levithan",
+            "ano": 2012,
+            "genero": "Romance",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "U": [],
+    "V": [
+        {
+            "titulo": "Vidas Secas",
+            "autor": "Graciliano Ramos",
+            "ano": 1938,
+            "genero": "Romance",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "W": [
+        {
+            "titulo": "War and Peace (Guerra e Paz)",
+            "autor": "Leo Tolstoy",
+            "ano": 1869,
+            "genero": "Histórico",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "X": [],
+    "Y": [],
+    "Z": [
+        {
+            "titulo": "Zorba, o Grego",
+            "autor": "Nikos Kazantzakis",
+            "ano": 1946,
+            "genero": "Filosofia",
+            "status": "DISPONÍVEL"
+        }
+    ],
+    "NUM": [
+        {
+            "titulo": "1984",
+            "autor": "George Orwell",
+            "ano": 1949,
+            "genero": "Distopia",
+            "status": "DISPONÍVEL"
+        },
+        {
+            "titulo": "2001: Uma Odisseia no Espaço",
+            "autor": "Arthur C. Clarke",
+            "ano": 1968,
+            "genero": "Ficção Científica",
+            "status": "DISPONÍVEL"
+        }
+    ]
+}

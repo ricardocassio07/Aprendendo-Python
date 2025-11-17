@@ -15,71 +15,53 @@
     -> Persistência de dados em arquivos;
     -> Interface interativa com menus paginados.
 '''
-# Dicionário que armazena vetores, sendo cada um deles responsável por armazenar as obras em ordem alfabética, sendo o primeiro resposável por armazenar as obras com que se iniciam com a letra 'a' e o penúltimo com a letra 'z', o último vetor irá armazenar as obras com início numérico:
+import json
+from ferramentas import (
+    verificar_ou_criar_json,
+    carregar_json,
+    salvar_json,
+    converter_listas_para_tuplas,
+    converter_tuplas_para_listas
+)
 
 letras = [
     "A","B","C","D","E","F","G","H","I","J","K","L","M",
     "N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
 ]
-obras = {
-    "A": [("A Revolução dos Bichos", "George Orwell", 1945, "Sátira", "DISPONÍVEL")],
-    "B": [],
-    "C": [("Capitães da Areia", "Jorge Amado", 1937, "Romance", "DISPONÍVEL")],
-    "D": [("Dom Casmurro", "Machado de Assis", 1899, "Romance", "DISPONÍVEL")],
-    "E": [("Ensaio sobre a Cegueira", "José Saramago", 1995, "Ficção", "DISPONÍVEL")],
-    "F": [],
-    "G": [("Grande Sertão: Veredas", "João Guimarães Rosa", 1956, "Romance", "DISPONÍVEL")],
-    "H": [("Harry Potter e a Pedra Filosofal", "J.K. Rowling", 1997, "Fantasia", "DISPONÍVEL")],
-    "I": [],
-    "J": [],
-    "K": [],
-    "L": [],
-    "M": [("Memórias Póstumas de Brás Cubas", "Machado de Assis", 1881, "Romance", "DISPONÍVEL")],
-    "N": [],
-    "O": [("O Pequeno Príncipe", "Antoine de Saint-Exupéry", 1943, "Infantil", "DISPONÍVEL"), ("O Hobbit", "J.R.R. Tolkien", 1937, "Fantasia", "DISPONÍVEL")],
-    "P": [],
-    "Q": [],
-    "R": [],
-    "S": [],
-    "T": [],
-    "U": [],
-    "V": [],
-    "W": [],
-    "X": [],
-    "Y": [],
-    "Z": [],
-    "NUM": [("1984", "George Orwell", 1949, "Distopia", "DISPONÍVEL")]
-}
-usuarios = {
-    "A": [],
-    "B": [],
-    "C": [],
-    "D": [],
-    "E": [],
-    "F": [],
-    "G": [],
-    "H": [],
-    "I": [],
-    "J": [],
-    "K": [],
-    "L": [],
-    "M": [],
-    "N": [],
-    "O": [],
-    "P": [],
-    "Q": [],
-    "R": [],
-    "S": [],
-    "T": [],
-    "U": [],
-    "V": [],
-    "W": [],
-    "X": [],
-    "Y": [],
-    "Z": []
+
+arquivoDadosObras = "dadosObras.json"
+arquivoDadosUsuarios = "dadosUsuarios.json"
+arquivoDadosEmprestimos = "emprestimos.json"
+
+estrutura_obras = {
+    "A": [], "B": [], "C": [], "D": [], "E": [], "F": [], "G": [], "H": [],
+    "I": [], "J": [], "K": [], "L": [], "M": [], "N": [], "O": [], "P": [],
+    "Q": [], "R": [], "S": [], "T": [], "U": [], "V": [], "W": [], "X": [],
+    "Y": [], "Z": [], "NUM": []
 }
 
-emprestimos = []
+estrutura_usuarios = {
+    "A": [], "B": [], "C": [], "D": [], "E": [], "F": [], "G": [], "H": [],
+    "I": [], "J": [], "K": [], "L": [], "M": [], "N": [], "O": [], "P": [],
+    "Q": [], "R": [], "S": [], "T": [], "U": [], "V": [], "W": [], "X": [],
+    "Y": [], "Z": []
+}
+
+estrutura_emprestimos = []
+
+# Verificar os arquivos:
+verificar_ou_criar_json(arquivoDadosObras, estrutura_obras)
+verificar_ou_criar_json(arquivoDadosUsuarios, estrutura_usuarios)
+verificar_ou_criar_json(arquivoDadosEmprestimos, estrutura_emprestimos)
+
+# Carregar dados convertendo listas → tuplas
+obras = carregar_json(arquivoDadosObras)
+usuarios = carregar_json(arquivoDadosUsuarios)
+emprestimos = carregar_json(arquivoDadosEmprestimos)
+
+salvar_json(arquivoDadosObras, converter_tuplas_para_listas(obras))
+salvar_json(arquivoDadosUsuarios, converter_tuplas_para_listas(usuarios))
+salvar_json(arquivoDadosEmprestimos, emprestimos)
 
 
 def verificar():             
@@ -162,7 +144,7 @@ while (continuar_no_sistema == True):
                         while (verificado == False):
                             try:
                                 opcao = (int(input("QUAL CATEGORIA DESEJA VISUALIZAR?\nDIGITE:\n1- À PARTIR DA LETRA INICIAL DA OBRA\n2- À PARTIR DO AUTOR\n3- À PARTIR DO ANO DE PUBLICAÇÃO\n4- À PARTIR DO GÊNERO\n5- LIVROS INICIADOS COM NÚMERO\n6- BUSCAR POR UMA OBRA ESPECÍFICA\n-> ")))
-                                if (1 <= opcao <= 4):
+                                if (1 <= opcao <= 6):
                                     verificado = True
                                 else:
                                     print("-> DESEJO INVÁLIDO <-")
@@ -185,12 +167,13 @@ while (continuar_no_sistema == True):
                                 print("-> AINDA NÃO FORAM CADASTRADAS NENHUMA OBRA <-")
                             else:
                                 for obra in obras[letra]:
+                                    # print(obra)
                                     print("----------------------------------------------")
-                                    print("NOME: {}".format(obra[0]))
-                                    print("AUTOR: {}".format(obra[1]))
-                                    print("ANO: {}".format(obra[2]))
-                                    print("GÊNERO: {}".format(obra[3]))
-                                    print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra[4]))
+                                    print("NOME: {}".format(obra['titulo']))
+                                    print("AUTOR: {}".format(obra['autor']))
+                                    print("ANO: {}".format(obra['ano']))
+                                    print("GÊNERO: {}".format(obra['genero']))
+                                    print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra['status']))
 
                         # 2- À PARTIR DO AUTOR:
                         elif (opcao == 2):
@@ -203,18 +186,19 @@ while (continuar_no_sistema == True):
                                 else:
                                     print("-> DESEJO INVÁLIDO <-")
 
-                            if len(obras[letra]) == 0:
+                            qtdeObras = 0
+                            for inicial in obras:
+                                for obra in obras[inicial]:
+                                    if (obra['autor'] == autor):
+                                        print("----------------------------------------------")
+                                        print("NOME: {}".format(obra['título']))
+                                        print("ANO: {}".format(obra['ano']))
+                                        print("GÊNERO: {}".format(obra['genero']))
+                                        print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra['status']))
+                                        qtdeObras += 1
+
+                            if (qtdeObras == 0):
                                 print("-> AINDA NÃO FORAM CADASTRADAS NENHUMA OBRA <-")
-                            else:
-                                for inicial in obras:
-                                    for obra in obras[inicial]:
-                                        if (obra[1] == autor):
-                                            print("----------------------------------------------")
-                                            print("NOME: {}".format(obra[0]))
-                                            print("AUTOR: {}".format(obra[1]))
-                                            print("ANO: {}".format(obra[2]))
-                                            print("GÊNERO: {}".format(obra[3]))
-                                            print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra[4]))
 
                         # 3- À PARTIR DO ANO DE PUBLICAÇÃO DA OBRA:
                         elif (opcao == 3):
@@ -231,18 +215,18 @@ while (continuar_no_sistema == True):
                                 except:
                                     print("-> DIGITE APENAS NÚMEROS <-")
 
-                            if len(obras[letra]) == 0:
+                            qtdeObras = 0
+                            for inicial in obras:
+                                for obra in obras[inicial]:
+                                    if (obra['ano'] == ano):
+                                        print("----------------------------------------------")
+                                        print("NOME: {}".format(obra['titulo']))
+                                        print("AUTOR: {}".format(obra['autor']))
+                                        print("GÊNERO: {}".format(obra['genero']))
+                                        print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra['status']))
+
+                            if (qtdeObras == 0):
                                 print("-> AINDA NÃO FORAM CADASTRADAS NENHUMA OBRA <-")
-                            else:
-                                for inicial in obras:
-                                    for obra in obras[inicial]:
-                                        if (obra[2] == ano):
-                                            print("----------------------------------------------")
-                                            print("NOME: {}".format(obra[0]))
-                                            print("AUTOR: {}".format(obra[1]))
-                                            print("ANO: {}".format(obra[2]))
-                                            print("GÊNERO: {}".format(obra[3]))
-                                            print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra[4]))
 
                         # 4- À PARTIR DO GÊNERO
                         elif (opcao == 4):
@@ -255,31 +239,32 @@ while (continuar_no_sistema == True):
                                 else:
                                     print("-> DESEJO INVÁLIDO <-")
 
-                            if len(obras[letra]) == 0:
+                            qtdeObras = 0
+                            for inicial in obras:
+                                for obra in obras[inicial]:
+                                    if (obra['genero'] == genero):
+                                        print("----------------------------------------------")
+                                        print("NOME: {}".format(obra['nome']))
+                                        print("AUTOR: {}".format(obra['autor']))
+                                        print("ANO: {}".format(obra['ano']))
+                                        print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra['status']))
+                                        
+                            if (qtdeObras == 0):
                                 print("-> AINDA NÃO FORAM CADASTRADAS NENHUMA OBRA <-")
-                            else:
-                                for inicial in obras:
-                                    for obra in obras[inicial]:
-                                        if (obra[3] == genero):
-                                            print("----------------------------------------------")
-                                            print("NOME: {}".format(obra[0]))
-                                            print("AUTOR: {}".format(obra[1]))
-                                            print("ANO: {}".format(obra[2]))
-                                            print("GÊNERO: {}".format(obra[3]))
-                                            print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra[4]))
 
                         # 5- LIVROS INICIADOS COM NÚMERO
                         elif (opcao == 5):
-                            if len(obras[letra]) == 0:
+                            if len(obras["NUM"]) == 0:
                                 print("-> AINDA NÃO FORAM CADASTRADAS NENHUMA OBRA <-")
                             else:
                                 for obra in obras["NUM"]:
                                     print("----------------------------------------------")
-                                    print("NOME: {}".format(obra[0]))
-                                    print("AUTOR: {}".format(obra[1]))
-                                    print("ANO: {}".format(obra[2]))
-                                    print("GÊNERO: {}".format(obra[3]))
-                                    print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra[4]))
+                                    print("NOME: {}".format(obra['titulo']))
+                                    print("AUTOR: {}".format(obra['autor']))
+                                    print("ANO: {}".format(obra['ano']))
+                                    print("GÊNERO: {}".format(obra['genero']))
+                                    print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra['status']))
+
 
                         # 6- BUSCAR POR UMA OBRA ESPECÍFICA
                         elif (opcao == 6):
@@ -293,18 +278,26 @@ while (continuar_no_sistema == True):
                                 else:
                                     print("-> DESEJO INVÁLIDO <-")
 
-                            if len(obras[letra]) == 0:
+                            obraEncontrada = False
+                            if (len(obras[(nomeObra[0].upper())]) == 0):
                                 print("-> AINDA NÃO FORAM CADASTRADAS NENHUMA OBRA <-")
                             else:
                                 for inicial in obras:
                                     for obra in obras[inicial]:
-                                        if (((obra[0]).lower()) == nomeObra):
+                                        if (((obra['titulo']).lower()) == nomeObra):
                                             print("----------------------------------------------")
-                                            print("NOME: {}".format(obra[0]))
-                                            print("AUTOR: {}".format(obra[1]))
-                                            print("ANO: {}".format(obra[2]))
-                                            print("GÊNERO: {}".format(obra[3]))
-                                            print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra[4]))
+                                            print("NOME: {}".format(obra['titulo']))
+                                            print("AUTOR: {}".format(obra['autor']))
+                                            print("ANO: {}".format(obra['autor']))
+                                            print("GÊNERO: {}".format(obra['genero']))
+                                            print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra['status']))
+                                            obraEncontrada = True
+                                            break
+                                    if (obraEncontrada == True):
+                                        break
+                            
+                            if (obraEncontrada == False):
+                                print("-> OBRA AINDA NÃO CATÁLOGADA <-")
 
                         print("VOCÊ DESEJA CONTINUAR BUSCANDO POR ALGUMA OBRA CATÁLOGADA:")
                         continuarMostrarObras = verificar()
@@ -357,18 +350,24 @@ while (continuar_no_sistema == True):
                             else:
                                 print("-> DESEJO INVÁLIDO <-")
 
-
-                        obra = (nomeObra, nomeAutor, ano, genero, "DISPONÍVEL")
-                        print(obra)
+                        obra = {
+                            "titulo": nomeObra,
+                            "autor": nomeAutor,
+                            "ano": ano,
+                            "genero": genero,
+                            "status": "DISPONÍVEL"
+                            }
+                        # print(obra)
                         # print(obra[0])
-                        for inicial in obras:
-                            if (inicial.upper() in letras):
-                                if ((nomeObra[0]) == (inicial.lower())):
-                                    obras[inicial].append(obra)
-                                    # print(obras[inicial])
-                            else:
-                                obras["NUM"].append(obra)
-                                # print(obras["NUM"])
+                        primeiraLetra = (nomeObra[0].upper())
+                        if (primeiraLetra in obras):
+                            # print(primeiraLetra, type(obras[primeiraLetra]), type(obra))
+                            obras[primeiraLetra].append(obra)
+                            salvar_json(arquivoDadosObras, obras)
+                            # print(obras[inicial])
+                        else:
+                            obras["NUM"].append(obra)
+                            # print(obras["NUM"])
                         
                         print("VOCÊ DESEJA INSERIR MAIS ALGUMA OBRA:")
                         continuarInserirObras = verificar()
@@ -537,7 +536,7 @@ while (continuar_no_sistema == True):
                             verificado = False
                             while (verificado == False):
                                 try:
-                                    codigoObra = (int(input("DIGITE O CÓDIGO DA OBRA QUE DESEJA MODIFICAR DA OBRA:\n-> ")))
+                                    codigoObra = (int(input("DIGITE O CÓDIGO DA OBRA QUE DESEJA MODIFICAR:\n-> ")))
                                 
                                     if (1 <= codigoObra <= codigo):
                                         verificado = True
@@ -550,6 +549,7 @@ while (continuar_no_sistema == True):
                         verificado = False
                         while (verificado == False):
                             try:
+                                print("----------------------------------------------")
                                 print("VOCÊ TEM CERTEZA QUE DESEJA EXCLUIR A OBRA:")
                                 print("CÓDIGO: {}".format(codigoObra))
                                 print("NOME: {}".format(obras[inicial][(codigoObra - 1)][0]))
@@ -588,6 +588,7 @@ while (continuar_no_sistema == True):
                         "1- VISUALIZAR USUÁRIOS CADASTRADAS\n"\
                         "2- CADASTRAR USUÁRIO\n"\
                         "3- MODIFICAR AS INFORMAÇÕES DE ALGUM USUÁRIO\n"
+                        "4- EXCLUIR USUÁRIO\n"
                         "-> "
                         )))
                         if (1 <= desejoUser <= 4):
@@ -874,15 +875,18 @@ while (continuar_no_sistema == True):
                                     print("NOME: {}".format(usuario[1]))
                                     print("DATA DE NASCIMENTO: {}".format(usuario[2]))
                                     userCadastrado = True
-
-                                    print("REALMENTE DESEJA EXCLUIR O USUÁRIO:")
-                                    desejoExcluir = verificar()
-                                    if (desejoExcluir == 1):
-                                        del usuarios[inicial][index]
-                                        # RETIRAR OS EMPRÉSTIMOS CORRESPONDENTES TBM
+                                    break
+                            if (userCadastrado == True):
+                                break
                                 
                         if (userCadastrado == False):
                             print("-> USUÁRIO NÃO CADASTRADO <-")
+                        else:
+                            print("REALMENTE DESEJA EXCLUIR O USUÁRIO:")
+                            desejoExcluir = verificar()
+                            if (desejoExcluir == 1):
+                                del usuarios[inicial][index]
+                                # RETIRAR OS EMPRÉSTIMOS CORRESPONDENTES TBM
 
                         print("DESEJA EXCLUIR MAIS ALGUM USUÁRIO:")
                         continuarExcluirUsuarios = verificar()
@@ -891,7 +895,7 @@ while (continuar_no_sistema == True):
                 continuarGerenciarUsuarios = verificar()
                 
 
-        # Gereniar empréstimos:
+        # Gerenciar empréstimos:
         elif (desejo == 3):
             print("--------- GERENCIADOR DE EMPRÉSTIMOS ---------")
             continuarGerenciarEmprestimos = True
@@ -913,13 +917,161 @@ while (continuar_no_sistema == True):
                         print("-> DIGITE APENAS NÚMEROS! <-")
 
                 if (desejoEmpres == 1):
-                    # Cadastrar empréstimo da obra
-                    print("Cadastrar empréstimo da obra")
+                    print("------------ CADASTRAR EMPRÉSTIMO ------------")
+                    continuarCadastrandoEmprestimo = True
+                    while (continuarCadastrandoEmprestimo == True):
+                        verificado = False
+                        while (verificado == False):
+                            try:
+                                cpfU = (int(input("DIGITE O CPF DO USUÁRIO (SEM TRAÇOS OU PONTOS):\n-> ")))
+                                cpfU = str(cpfU)
+                                if (len(cpfU) == 11):
+                                    verificado = True
+                                else:
+                                    print("-> DESEJO INVÁLIDO <-")
+                            except ValueError:
+                                print("-> DIGITE APENAS NÚMEROS <-")
+
+
+                        userCadastrado = False
+                        for inicial in usuarios:
+                            index = -1
+                            for usuario in usuarios[inicial]:
+                                index += 1
+                                if (usuario[0] == cpfU):
+                                    cpf = usuario[0]
+                                    print("----------------------------------------------")
+                                    print("CPF: {0}{1}{2}.{3}{4}{5}.{6}{7}{8}-{9}{10}".format(cpf[0], cpf[1], cpf[2], cpf[3], cpf[4], cpf[5], cpf[6], cpf[7], cpf[8], cpf[9], cpf[10]))
+                                    print("NOME: {}".format(usuario[1]))
+                                    print("DATA DE NASCIMENTO: {}".format(usuario[2]))
+                                    userCadastrado = True
+                                    break
+                            if (userCadastrado == True):
+                                break
+                                
+                        if (userCadastrado == False):
+                            print("-> USUÁRIO NÃO CADASTRADO <-")
+                        else:
+                            
+                            verificado = False
+                            while (verificado == False):
+                                letra = (input("DIGITE A LETRA:\n-> "))
+                                # Ajustando a letra para minúsculo:
+                                letra = letra.upper()
+                                if (letra in letras):
+                                    verificado = True
+                                else:
+                                    print("-> DESEJO INVÁLIDO <-")
+                            
+                            codigo = 0
+                            if len(obras[letra]) == 0:
+                                print("-> AINDA NÃO FORAM CADASTRADAS NENHUMA OBRA <-")
+                            else:
+                                for obra in obras[letra]:
+                                    codigo += 1
+                                    print("----------------------------------------------")
+                                    print("CÓDIGO: {}".format(codigo))
+                                    print("NOME: {}".format(obra[0]))
+                                    print("AUTOR: {}".format(obra[1]))
+                                    print("ANO: {}".format(obra[2]))
+                                    print("GÊNERO: {}".format(obra[3]))
+                                    print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra[4]))
+
+                                verificado = False
+                                while (verificado == False):
+                                    try:
+                                        codigoObra = (int(input("DIGITE O CÓDIGO DA OBRA QUE O USUÁRIO DESEJA ALUGAR:\n-> ")))
+                                    
+                                        if (1 <= codigoObra <= codigo):
+                                            verificado = True
+                                        else:
+                                            print("-> DESEJO INVÁLIDO <-")
+                                    except ValueError:
+                                        print("-> DIGITE APENAS NÚMEROS <-")
+
+                                if (obras[letra][(codigoObra - 1)][4] == ("DISPONÍVEL")):
+                                    print("-> OBRA DISPONÍVEL PARA EMPRÉSTIMO <-")
+                                    nomeObra = obras[letra][(codigoObra - 1)][0]
+                                    nomeAutor = obras[letra][(codigoObra - 1)][1]
+                                    ano = obras[letra][(codigoObra - 1)][2]
+                                    genero = obras[letra][(codigoObra - 1)][3]
+                                    del obras[letra][(codigoObra - 1)]
+                                    obras[letra].append((nomeObra, nomeAutor, ano, genero, "INDISPONÍVEL"))
+                                    emprestimos.append((cpfU, obras[letra][(codigoObra - 1)][0]))
+                                else:
+                                    print("-> OBRA INDISPONÍVEL PARA EMPRÉSTIMO <-")
+
+
+                        print("DESEJA CADASTRAR MAIS ALGUM EMPRÉSTIMO:")
+                        continuarCadastrandoEmprestimo = verificar()
+                        
                 elif (desejoEmpres == 2):
                     # Cadastrar devolução da obra
-                    print("Cadastrar devolução da obra")
+                    print("------------ CADASTRAR DEVOLUÇÃO ------------")
+                    continuarCadastrandoDevolucao = True
+                    while (continuarCadastrandoDevolucao == True):
+                        verificado = False
+                        while (verificado == False):
+                            try:
+                                cpfU = (int(input("DIGITE O CPF DO USUÁRIO (SEM TRAÇOS OU PONTOS):\n-> ")))
+                                cpfU = str(cpfU)
+                                if (len(cpfU) == 11):
+                                    verificado = True
+                                else:
+                                    print("-> DESEJO INVÁLIDO <-")
+                            except ValueError:
+                                print("-> DIGITE APENAS NÚMEROS <-")
 
-                    
+
+                        codigo = 0
+                        usuerRealizouEmprestimo = False
+                        for emprestimo in emprestimos:
+                            if (emprestimo[0] == cpfU):
+                                print("---------------------------------------------")
+                                usuerRealizouEmprestimo = True
+                                codigo += 1
+                                print("CÓDIGO: {}".format(codigo))
+                                print("OBRA: {}".format(emprestimo[1]))
+
+                        if (usuerRealizouEmprestimo == False):
+                            print("-> O USUÁRIO NÃO ALUGOU NENHUM LIVRO <-")
+                        else:
+                            continnuarComEsseUsuario = True
+                            while (continnuarComEsseUsuario == True):
+                                verificado = False
+                                while (verificado == False):
+                                    try:
+                                        codigoObra = (int(input("DIGITE O CÓDIGO DO EMPRÉSTIMO A SER EXCLUIDO:\n-> ")))
+                                        if (1 <= codigoObra <= codigo):
+                                            verificado = True
+                                        else:
+                                            print("-> DESEJO INVÁLIDO <-")
+                                    except ValueError:
+                                        print("-> DIGITE APENAS NÚMEROS <-")
+                                
+                                nObra = emprestimos[(codigoObra - 1)][1]
+                                print(nObra)
+                                del emprestimos[(codigoObra - 1)]
+
+                                for inicial in obras:
+                                    index = -1
+                                    for obra in obras[inicial]:
+                                        index += 1
+                                        if (obra[0] == nObra):
+                                            nomeObra = obra[0]
+                                            nomeAutor = obra[1]
+                                            ano = obra[2]
+                                            genero = obra[3]
+                                            del obras[inicial][index]
+                                            obras[inicial].append((nomeObra, nomeAutor, ano, genero, "DISPONÍVEL"))
+                                
+                                print("DESEJA CADASTRAR OUTRA DEVOLUÇÃO DESSE USUÁRIO")
+                                continnuarComEsseUsuario = verificar()
+                                        
+                        print("DESEJA CADASTRAR OUTRA DEVOLUÇÃO:")
+                        continuarCadastrandoDevolucao = verificar()
+                
+                print("DESEJA CONTINUAR GERENCIANDO OS EMPRÉSTIMOS DOS USUÁRIOS:")
                 continuarGerenciarEmprestimos = verificar()
 
         print("DESEJA CONTINUAR NO SISTEMA:")
