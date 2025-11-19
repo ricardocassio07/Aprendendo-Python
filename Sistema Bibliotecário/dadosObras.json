@@ -1,25 +1,25 @@
 {
     "A": [
         {
-            "titulo": "A Revolução dos Bichos",
-            "autor": "George Orwell",
-            "ano": 1945,
-            "genero": "Sátira",
-            "status": "DISPONÍVEL"
-        },
-        {
             "titulo": "A Metamorfose",
             "autor": "Franz Kafka",
             "ano": 1915,
             "genero": "Ficção Existencial",
-            "status": "DISPONÍVEL"
+            "status": "INDISPONÍVEL"
         },
         {
             "titulo": "A Menina que Roubava Livros",
             "autor": "Markus Zusak",
             "ano": 2005,
             "genero": "Drama",
-            "status": "DISPONÍVEL"
+            "status": "INDISPONÍVEL"
+        },
+        {
+            "titulo": "A Revolução dos Bichos",
+            "autor": "George Orwell",
+            "ano": 1945,
+            "genero": "Sátira",
+            "status": "INDISPONÍVEL"
         }
     ],
     "B": [
@@ -44,7 +44,7 @@
             "autor": "Gabriel García Márquez",
             "ano": 1967,
             "genero": "Realismo Mágico",
-            "status": "DISPONÍVEL"
+            "status": "INDISPONÍVEL"
         }
     ],
     "D": [

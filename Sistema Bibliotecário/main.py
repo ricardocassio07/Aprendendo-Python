@@ -20,8 +20,6 @@ from ferramentas import (
     verificar_ou_criar_json,
     carregar_json,
     salvar_json,
-    converter_listas_para_tuplas,
-    converter_tuplas_para_listas
 )
 
 letras = [
@@ -59,8 +57,8 @@ obras = carregar_json(arquivoDadosObras)
 usuarios = carregar_json(arquivoDadosUsuarios)
 emprestimos = carregar_json(arquivoDadosEmprestimos)
 
-salvar_json(arquivoDadosObras, converter_tuplas_para_listas(obras))
-salvar_json(arquivoDadosUsuarios, converter_tuplas_para_listas(usuarios))
+salvar_json(arquivoDadosObras, obras)
+salvar_json(arquivoDadosUsuarios, usuarios)
 salvar_json(arquivoDadosEmprestimos, emprestimos)
 
 
@@ -143,7 +141,7 @@ while (continuar_no_sistema == True):
                         verificado = False
                         while (verificado == False):
                             try:
-                                opcao = (int(input("QUAL CATEGORIA DESEJA VISUALIZAR?\nDIGITE:\n1- À PARTIR DA LETRA INICIAL DA OBRA\n2- À PARTIR DO AUTOR\n3- À PARTIR DO ANO DE PUBLICAÇÃO\n4- À PARTIR DO GÊNERO\n5- LIVROS INICIADOS COM NÚMERO\n6- BUSCAR POR UMA OBRA ESPECÍFICA\n-> ")))
+                                opcao = (int(input("QUAL CATEGORIA DESEJA VISUALIZAR?\nDIGITE:\n1- À PARTIR DA LETRA INICIAL DO TÍTULO DA OBRA\n2- À PARTIR DO AUTOR\n3- À PARTIR DO ANO DE PUBLICAÇÃO\n4- À PARTIR DO GÊNERO\n5- LIVROS INICIADOS COM NÚMERO\n6- BUSCAR POR UMA OBRA ESPECÍFICA\n-> ")))
                                 if (1 <= opcao <= 6):
                                     verificado = True
                                 else:
@@ -368,6 +366,7 @@ while (continuar_no_sistema == True):
                         else:
                             obras["NUM"].append(obra)
                             # print(obras["NUM"])
+                            salvar_json(arquivoDadosObras, obras)
                         
                         print("VOCÊ DESEJA INSERIR MAIS ALGUMA OBRA:")
                         continuarInserirObras = verificar()
@@ -414,11 +413,11 @@ while (continuar_no_sistema == True):
                                 codigo += 1
                                 print("----------------------------------------------")
                                 print("CÓDIGO: {}".format(codigo))
-                                print("NOME: {}".format(obra[0]))
-                                print("AUTOR: {}".format(obra[1]))
-                                print("ANO: {}".format(obra[2]))
-                                print("GÊNERO: {}".format(obra[3]))
-                                print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra[4]))
+                                print("NOME: {}".format(obra["titulo"]))
+                                print("AUTOR: {}".format(obra["autor"]))
+                                print("ANO: {}".format(obra["ano"]))
+                                print("GÊNERO: {}".format(obra["genero"]))
+                                print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra["status"]))
 
                             verificado = False
                             while (verificado == False):
@@ -434,10 +433,10 @@ while (continuar_no_sistema == True):
 
 
                             for obra in obras[inicial]:
-                                print(obra)
+                                # print(obra)
                                 if ((obras[inicial].index(obra) + 1) == codigo):
                                     obraOriginal = obras[inicial][codigo - 1]
-                                    print(obraOriginal)
+                                    # print(obraOriginal)
 
 
                             verificado = False
@@ -472,14 +471,21 @@ while (continuar_no_sistema == True):
                                     print("-> DESEJO INVÁLIDO <-")
 
 
-                            obraModificada = (obraOriginal[0], nomeAutor, ano, "DISPONÍVEL")
                             # print(obraModificada)
-
+                            obraModificada = {
+                                "titulo": obraOriginal["titulo"],
+                                "autor": nomeAutor,
+                                "ano": ano,
+                                "genero": genero,
+                                "status": obraOriginal["status"]
+                                }
                             # Excluir o item original
                             del obras[inicial][codigoObra - 1]
 
                             # Inserir no lugar correto
                             obras[inicial].insert(codigoObra - 1, obraModificada)
+                            
+                            salvar_json(arquivoDadosObras, obras)
 
                         
                     print("VOCÊ DESEJA MODIFICAR MAIS ALGUMA OBRA:")
@@ -527,11 +533,11 @@ while (continuar_no_sistema == True):
                                 codigo += 1
                                 print("----------------------------------------------")
                                 print("CÓDIGO: {}".format(codigo))
-                                print("NOME: {}".format(obra[0]))
-                                print("AUTOR: {}".format(obra[1]))
-                                print("ANO: {}".format(obra[2]))
-                                print("GÊNERO: {}".format(obra[3]))
-                                print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra[4]))
+                                print("NOME: {}".format(obra["titulo"]))
+                                print("AUTOR: {}".format(obra["autor"]))
+                                print("ANO: {}".format(obra["ano"]))
+                                print("GÊNERO: {}".format(obra["genero"]))
+                                print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra["status"]))
 
                             verificado = False
                             while (verificado == False):
@@ -552,17 +558,18 @@ while (continuar_no_sistema == True):
                                 print("----------------------------------------------")
                                 print("VOCÊ TEM CERTEZA QUE DESEJA EXCLUIR A OBRA:")
                                 print("CÓDIGO: {}".format(codigoObra))
-                                print("NOME: {}".format(obras[inicial][(codigoObra - 1)][0]))
-                                print("AUTOR: {}".format(obras[inicial][(codigoObra - 1)][1]))
-                                print("ANO: {}".format(obras[inicial][(codigoObra - 1)][2]))
-                                print("GÊNERO: {}".format(obras[inicial][(codigoObra - 1)][3]))
-                                print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obras[inicial][(codigoObra - 1)][4]))
+                                print("NOME: {}".format(obras[inicial][(codigoObra - 1)]["titulo"]))
+                                print("AUTOR: {}".format(obras[inicial][(codigoObra - 1)]["autor"]))
+                                print("ANO: {}".format(obras[inicial][(codigoObra - 1)]["ano"]))
+                                print("GÊNERO: {}".format(obras[inicial][(codigoObra - 1)]["genero"]))
+                                print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obras[inicial][(codigoObra - 1)]["status"]))
                                 desejo = (int(input("DIGITE:\n1- SIM\n2- NÃO\n-> "
                                 )))
                                 if (1 <= desejo <= 2):
                                     verificado = True
                                     if (desejo == 1):
                                         del obras[inicial][codigoObra - 1]
+                                        salvar_json(arquivoDadosObras, obras)
                                 else:
                                     print("-> OPÇÃO INVÁLIDA<-")
                             except:
@@ -627,6 +634,9 @@ while (continuar_no_sistema == True):
                                 print("DATA DE NASCIMENTO: {}".format(usuario[2]))
                                 print("OBRAS ALUGADAS: {}")
                                 # for emprestimo in emprestimos:
+                                for emprestimo in emprestimos:
+                                    if (emprestimo[0] == cpf):
+                                        print("OBRA: {}".format(emprestimo[1]))
 
                         print("DESEJA CONTINUAR VISUALIZANDO OS USUÁRIOS CADASTRADOS:")
                         continuarVisualizarUsuarios = verificar()
@@ -750,6 +760,7 @@ while (continuar_no_sistema == True):
                             inicialNomeUser = (nomeUsuario[0])
 
                             usuarios[inicialNomeUser].append((CPF, nomeUsuario, dataNascimento))
+                            salvar_json(arquivoDadosUsuarios, usuarios)
 
                         print("DESEJA CONTINUAR CADASTRANDO NOVOS USUÁRIOS:")
                         continuarCadastrarUsuario = verificar()
@@ -840,6 +851,7 @@ while (continuar_no_sistema == True):
                             inicialNomeUser = (nomeUsuario[0])
 
                             usuarios[inicialNomeUser].append((cpfU, nomeUsuario, dataNascimento))
+                            salvar_json(arquivoDadosUsuarios, usuarios)
 
 
                     print("DESEJA MODIFICAR OS DADOS DE MAIS ALGUM USÁRIO:")
@@ -886,6 +898,7 @@ while (continuar_no_sistema == True):
                             desejoExcluir = verificar()
                             if (desejoExcluir == 1):
                                 del usuarios[inicial][index]
+                                salvar_json(arquivoDadosUsuarios, usuarios)
                                 # RETIRAR OS EMPRÉSTIMOS CORRESPONDENTES TBM
 
                         print("DESEJA EXCLUIR MAIS ALGUM USUÁRIO:")
@@ -909,7 +922,7 @@ while (continuar_no_sistema == True):
                         "2- CADASTRAR DEVOLUÇÃO\n"\
                         "-> "
                         )))
-                        if (1 <= desejo <= 2):
+                        if (1 <= desejoEmpres <= 2):
                             verificado = True
                         else:
                             print("-> DESEJO INVÁLIDO <-")
@@ -955,7 +968,7 @@ while (continuar_no_sistema == True):
                             
                             verificado = False
                             while (verificado == False):
-                                letra = (input("DIGITE A LETRA:\n-> "))
+                                letra = (input("DIGITE A LETRA INICIAL DO TÍTULO DA OBRA:\n-> "))
                                 # Ajustando a letra para minúsculo:
                                 letra = letra.upper()
                                 if (letra in letras):
@@ -971,11 +984,11 @@ while (continuar_no_sistema == True):
                                     codigo += 1
                                     print("----------------------------------------------")
                                     print("CÓDIGO: {}".format(codigo))
-                                    print("NOME: {}".format(obra[0]))
-                                    print("AUTOR: {}".format(obra[1]))
-                                    print("ANO: {}".format(obra[2]))
-                                    print("GÊNERO: {}".format(obra[3]))
-                                    print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra[4]))
+                                    print("NOME: {}".format(obra["titulo"]))
+                                    print("AUTOR: {}".format(obra["autor"]))
+                                    print("ANO: {}".format(obra["ano"]))
+                                    print("GÊNERO: {}".format(obra["genero"]))
+                                    print("DISPONIBILIDADE PARA EMPRÉSTIMO: {}".format(obra["status"]))
 
                                 verificado = False
                                 while (verificado == False):
@@ -989,15 +1002,24 @@ while (continuar_no_sistema == True):
                                     except ValueError:
                                         print("-> DIGITE APENAS NÚMEROS <-")
 
-                                if (obras[letra][(codigoObra - 1)][4] == ("DISPONÍVEL")):
+                                if (obras[letra][(codigoObra - 1)]["status"] == ("DISPONÍVEL")):
                                     print("-> OBRA DISPONÍVEL PARA EMPRÉSTIMO <-")
-                                    nomeObra = obras[letra][(codigoObra - 1)][0]
-                                    nomeAutor = obras[letra][(codigoObra - 1)][1]
-                                    ano = obras[letra][(codigoObra - 1)][2]
-                                    genero = obras[letra][(codigoObra - 1)][3]
+                                    nomeObra = obras[letra][(codigoObra - 1)]["titulo"]
+                                    nomeAutor = obras[letra][(codigoObra - 1)]["autor"]
+                                    ano = obras[letra][(codigoObra - 1)]["ano"]
+                                    genero = obras[letra][(codigoObra - 1)]["genero"]
                                     del obras[letra][(codigoObra - 1)]
-                                    obras[letra].append((nomeObra, nomeAutor, ano, genero, "INDISPONÍVEL"))
-                                    emprestimos.append((cpfU, obras[letra][(codigoObra - 1)][0]))
+                                    obraModificada = {
+                                        "titulo": nomeObra,
+                                        "autor": nomeAutor,
+                                        "ano": ano,
+                                        "genero": genero,
+                                        "status": "INDISPONÍVEL"
+                                        }
+                                    obras[letra].append(obraModificada)
+                                    salvar_json(arquivoDadosObras, obras)
+                                    emprestimos.append((cpfU, obras[letra][(codigoObra - 1)]["titulo"]))
+                                    salvar_json(arquivoDadosEmprestimos, emprestimos)
                                 else:
                                     print("-> OBRA INDISPONÍVEL PARA EMPRÉSTIMO <-")
 
@@ -1050,20 +1072,23 @@ while (continuar_no_sistema == True):
                                         print("-> DIGITE APENAS NÚMEROS <-")
                                 
                                 nObra = emprestimos[(codigoObra - 1)][1]
-                                print(nObra)
+                                # print(nObra)
                                 del emprestimos[(codigoObra - 1)]
+                                salvar_json(arquivoDadosEmprestimos, emprestimos)
+                                
 
                                 for inicial in obras:
                                     index = -1
                                     for obra in obras[inicial]:
                                         index += 1
-                                        if (obra[0] == nObra):
-                                            nomeObra = obra[0]
-                                            nomeAutor = obra[1]
-                                            ano = obra[2]
-                                            genero = obra[3]
+                                        if (obra["titulo"] == nObra):
+                                            nomeObra = obra["titulo"]
+                                            nomeAutor = obra["autor"]
+                                            ano = obra["ano"]
+                                            genero = obra["genero"]
                                             del obras[inicial][index]
                                             obras[inicial].append((nomeObra, nomeAutor, ano, genero, "DISPONÍVEL"))
+                                            salvar_json(arquivoDadosObras, obras)
                                 
                                 print("DESEJA CADASTRAR OUTRA DEVOLUÇÃO DESSE USUÁRIO")
                                 continnuarComEsseUsuario = verificar()
